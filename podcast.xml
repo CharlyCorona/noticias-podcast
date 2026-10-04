@@ -4,15 +4,25 @@
     <title>sIA</title>
     <link>https://charlycorona.github.io/noticias-podcast</link>
     <language>es-mx</language>
-    <itunes:author>Carlos Corona</itunes:author>
+    <itunes:author>Jorge y Dalia</itunes:author>
     <itunes:image href="https://charlycorona.github.io/noticias-podcast/cover.jpg"/>
     <itunes:category text="Technology"/>
     <itunes:owner>
       <itunes:name>Carlos Corona</itunes:name>
       <itunes:email>charly.corona@gmail.com</itunes:email>
     </itunes:owner>
-    <description>sIA: El podcast de Inteligencia Artificial, Cloud, Big Data, Gadgets y Cultura Geek presentado por Carlos Corona, Jorge y Dalia.</description>
-<item>
+    <description>sIA: El podcast diario de Inteligencia Artificial, Cloud, Big Data, Gadgets y Cultura Geek presentado por Jorge y Dalia.</description>
+    <item>
+      <title>sIA Deep Dive: Model Context Protocol y Agentes Autónomos en Producción</title>
+      <description>Episodio Deep Dive de investigación exhaustiva: Model Context Protocol y Agentes Autónomos en Producción. Tesis: El protocolo MCP está reemplazando a las APIs REST tradicionales como el nuevo bus de integración estándar entre modelos de IA y herramientas del mundo real..</description>
+      <pubDate>Sun, 04 Oct 2026 11:17:42 GMT</pubDate>
+      <enclosure url="https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_MCP_Agentes_Produccion.mp3" length="5316211" type="audio/mpeg"/>
+      <guid isPermaLink="true">https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_MCP_Agentes_Produccion.mp3</guid>
+      <itunes:author>Jorge y Dalia</itunes:author>
+      <itunes:image href="https://charlycorona.github.io/noticias-podcast/cover.jpg"/>
+      <itunes:explicit>no</itunes:explicit>
+    </item>
+    <item>
       <title>sIA #2: De Plomeros a Arquitectos de Contexto: La Trampa del Vibe Coding y el Auge de Antigravity</title>
       <description>sIA #2: Análisis sobre Vibe Coding vs Vibe Reviewing, la ilusión de competencia técnica, la metamorfosis del ingeniero de datos a arquitecto de contexto y el paralelismo con el Sistema Cardinal de SAO.</description>
       <pubDate>Sat, 03 Oct 2026 23:19:21 GMT</pubDate>
@@ -22,7 +32,7 @@
       <itunes:image href="https://charlycorona.github.io/noticias-podcast/cover.jpg"/>
       <itunes:explicit>no</itunes:explicit>
     </item>
-<item>
+    <item>
       <title>sIA #1: Gemini 3.8, Agentic BigQuery, Android 17 y Sword Art Online</title>
       <description>Episodio diario de NoticIAs: IA Generativa, Google AI Studio, Data Engineering, Gadgets y Cultura Geek con el dúo Jorge y Dalia.</description>
       <pubDate>Sat, 03 Oct 2026 22:40:55 GMT</pubDate>
