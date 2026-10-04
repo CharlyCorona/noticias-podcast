@@ -1,7 +1,10 @@
 browser_profile/
 temp_chunks/
+temp/
+venv/
 *.pyc
 __pycache__/
 *.log
 debug_page.png
 dashboard_screenshot.png
+
