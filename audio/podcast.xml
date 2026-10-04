@@ -13,6 +13,46 @@
     </itunes:owner>
     <description>sIA: El podcast diario de Inteligencia Artificial, Cloud, Big Data, Gadgets y Cultura Geek presentado por Jorge y Dalia.</description>
     <item>
+      <title>sIA Deep Dive: Inferencia en el Borde vs Nube: NPU del Galaxy S25 e Insta360 X4</title>
+      <description>sIA Deep Dive: Silicio NPU en Galaxy S25 (Snapdragon/Exynos), inferencia de SLMs locales en One UI 9, visión computacional 8K en Insta360 X4 y el Augma de Ordinal Scale.</description>
+      <pubDate>Sun, 04 Oct 2026 13:06:58 GMT</pubDate>
+      <enclosure url="https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_Edge_AI_Galaxy_S25_Insta360.mp3" length="3238777" type="audio/mpeg"/>
+      <guid isPermaLink="true">https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_Edge_AI_Galaxy_S25_Insta360.mp3</guid>
+      <itunes:author>Jorge y Dalia</itunes:author>
+      <itunes:image href="https://charlycorona.github.io/noticias-podcast/cover.jpg"/>
+      <itunes:explicit>no</itunes:explicit>
+    </item>
+    <item>
+      <title>sIA Deep Dive: Data Mesh en Retail Masivo: Contratos Semánticos y Streaming Continuo</title>
+      <description>sIA Deep Dive: Descentralización de datos en retail de alta escala (estilo Walmart), Data Products con dbt y BigQuery, contratos semánticos en Kafka y economía de gremios.</description>
+      <pubDate>Sun, 04 Oct 2026 13:06:41 GMT</pubDate>
+      <enclosure url="https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_Data_Mesh_Retail_Streaming.mp3" length="2825023" type="audio/mpeg"/>
+      <guid isPermaLink="true">https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_Data_Mesh_Retail_Streaming.mp3</guid>
+      <itunes:author>Jorge y Dalia</itunes:author>
+      <itunes:image href="https://charlycorona.github.io/noticias-podcast/cover.jpg"/>
+      <itunes:explicit>no</itunes:explicit>
+    </item>
+    <item>
+      <title>sIA Deep Dive: El Fin de la Amnesia en LLMs: Context Caching y Memoria Persistente</title>
+      <description>sIA Deep Dive: Investigación profunda sobre Context Caching en Gemini, arquitecturas de memoria episódica jerárquica, aprendizaje anidado y el paralelismo con los Fluctlights de SAO.</description>
+      <pubDate>Sun, 04 Oct 2026 13:06:27 GMT</pubDate>
+      <enclosure url="https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_Context_Caching_Memoria_Persistente.mp3" length="3023740" type="audio/mpeg"/>
+      <guid isPermaLink="true">https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_Context_Caching_Memoria_Persistente.mp3</guid>
+      <itunes:author>Jorge y Dalia</itunes:author>
+      <itunes:image href="https://charlycorona.github.io/noticias-podcast/cover.jpg"/>
+      <itunes:explicit>no</itunes:explicit>
+    </item>
+    <item>
+      <title>sIA Deep Dive: BigQuery Gemini Cloud Assist y la Muerte de las Consultas Manuales</title>
+      <description>sIA Deep Dive: Análisis exhaustivo sobre cómo Gemini Cloud Assist en BigQuery y Dataplex desplaza el valor del Data Engineer del SQL manual a la modelación semántica y gobernanza.</description>
+      <pubDate>Sun, 04 Oct 2026 13:06:12 GMT</pubDate>
+      <enclosure url="https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_BigQuery_Gemini_Cloud_Assist.mp3" length="3155739" type="audio/mpeg"/>
+      <guid isPermaLink="true">https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_BigQuery_Gemini_Cloud_Assist.mp3</guid>
+      <itunes:author>Jorge y Dalia</itunes:author>
+      <itunes:image href="https://charlycorona.github.io/noticias-podcast/cover.jpg"/>
+      <itunes:explicit>no</itunes:explicit>
+    </item>
+    <item>
       <title>sIA Deep Dive: Model Context Protocol y Agentes Autónomos en Producción</title>
       <description>Episodio Deep Dive de investigación exhaustiva: Model Context Protocol y Agentes Autónomos en Producción. Tesis: El protocolo MCP está reemplazando a las APIs REST tradicionales como el nuevo bus de integración estándar entre modelos de IA y herramientas del mundo real..</description>
       <pubDate>Sun, 04 Oct 2026 11:17:42 GMT</pubDate>
