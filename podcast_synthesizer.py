@@ -151,7 +151,21 @@ async def process_dialogue(script_text: str, episode_title: str) -> Path:
     update_podcast_rss(episode_title, output_filename, final_output)
     return final_output
 
-def update_podcast_rss(episode_title: str, filename: str, filepath: Path):
+CONFIG_FILE = Path(r"C:\Carlos\noticias_podcast\podcast_config.json")
+
+def get_podcast_email() -> str:
+    if CONFIG_FILE.exists():
+        try:
+            import json
+            data = json.loads(CONFIG_FILE.read_text(encoding='utf-8'))
+            return data.get("owner_email", "")
+        except Exception:
+            pass
+    return ""
+
+def update_podcast_rss(episode_title: str, filename: str, filepath: Path, email_address: str = None):
+    if not email_address:
+        email_address = get_podcast_email() or "carlos@example.com"
     rss_file = AUDIO_DIR / "podcast.xml"
     file_size = filepath.stat().st_size
     pub_date = datetime.now().strftime("%a, %d %b %Y %H:%M:%S GMT")
@@ -180,6 +194,10 @@ def update_podcast_rss(episode_title: str, filename: str, filepath: Path):
     <itunes:author>Jorge y Dalia</itunes:author>
     <itunes:image href="{cover_url}"/>
     <itunes:category text="Technology"/>
+    <itunes:owner>
+      <itunes:name>Carlos Corona</itunes:name>
+      <itunes:email>{email_address}</itunes:email>
+    </itunes:owner>
     <description>Resumen y análisis técnico diario de noticias de IA, Cloud, Big Data, Gadgets y Anime en formato dúo conversacional con Jorge y Dalia.</description>
     {item_xml}
   </channel>
