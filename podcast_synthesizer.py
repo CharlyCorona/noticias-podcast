@@ -42,7 +42,7 @@ def clean_for_tts(text: str) -> str:
     t = re.sub(r'\bOne UI\b', 'Uan U I', t)
     return t
 
-async def process_dialogue(script_text: str, episode_title: str) -> Path:
+async def process_dialogue(script_text: str, episode_title: str, custom_filename: str = None, episode_description: str = None) -> Path:
     lines = script_text.strip().split('\n')
     chunks = []
     chunk_index = 0
@@ -115,7 +115,7 @@ async def process_dialogue(script_text: str, episode_title: str) -> Path:
 
     # Generate output filenames
     today_str = datetime.now().strftime("%Y-%m-%d")
-    output_filename = f"NoticIAs_Duo_{today_str}.mp3"
+    output_filename = custom_filename or f"sIA_{today_str}.mp3"
     final_output = AUDIO_DIR / output_filename
     spotify_output = SPOTIFY_DIR / output_filename
 
@@ -148,7 +148,7 @@ async def process_dialogue(script_text: str, episode_title: str) -> Path:
     print(f"[OK] Sincronizado en carpeta de Spotify: {spotify_output}")
 
     # Generate/Update RSS
-    update_podcast_rss(episode_title, output_filename, final_output)
+    update_podcast_rss(episode_title, output_filename, final_output, description=episode_description)
     return final_output
 
 CONFIG_FILE = Path(r"C:\Carlos\noticias_podcast\podcast_config.json")
@@ -163,20 +163,20 @@ def get_podcast_email() -> str:
             pass
     return ""
 
-def update_podcast_rss(episode_title: str, filename: str, filepath: Path, email_address: str = None):
+def update_podcast_rss(episode_title: str, filename: str, filepath: Path, email_address: str = None, description: str = None):
     if not email_address:
-        email_address = get_podcast_email() or "carlos@example.com"
+        email_address = get_podcast_email() or "charly.corona@gmail.com"
     rss_file = AUDIO_DIR / "podcast.xml"
     file_size = filepath.stat().st_size
     pub_date = datetime.now().strftime("%a, %d %b %Y %H:%M:%S GMT")
     base_url = "https://charlycorona.github.io/noticias-podcast"
     audio_url = f"{base_url}/audio/{filename}"
     cover_url = f"{base_url}/cover.jpg"
+    desc_text = description or "sIA: Análisis técnico y estratégico de Inteligencia Artificial, Cloud, Data Engineering, Gadgets y Cultura Geek con Jorge y Dalia."
     
-    item_xml = f"""
-    <item>
+    new_item = f"""    <item>
       <title>{episode_title}</title>
-      <description>Episodio diario de NoticIAs: IA Generativa, Google AI Studio, Data Engineering, Gadgets y Cultura Geek con el dúo Jorge y Dalia.</description>
+      <description>{desc_text}</description>
       <pubDate>{pub_date}</pubDate>
       <enclosure url="{audio_url}" length="{file_size}" type="audio/mpeg"/>
       <guid isPermaLink="true">{audio_url}</guid>
@@ -184,6 +184,21 @@ def update_podcast_rss(episode_title: str, filename: str, filepath: Path, email_
       <itunes:image href="{cover_url}"/>
       <itunes:explicit>no</itunes:explicit>
     </item>"""
+
+    # Preserve existing items
+    existing_items = []
+    if rss_file.exists():
+        try:
+            content = rss_file.read_text(encoding='utf-8')
+            items_found = re.findall(r'<item>.*?</item>', content, re.DOTALL)
+            for it in items_found:
+                if audio_url not in it:
+                    existing_items.append(f"    {it.strip()}")
+        except Exception as e:
+            print(f"[WARN] Error leyendo items existentes de RSS: {e}")
+
+    all_items = [new_item] + existing_items
+    items_block = "\n".join(all_items)
 
     rss_content = f"""<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
@@ -199,14 +214,13 @@ def update_podcast_rss(episode_title: str, filename: str, filepath: Path, email_
       <itunes:email>{email_address}</itunes:email>
     </itunes:owner>
     <description>sIA: El podcast diario de Inteligencia Artificial, Cloud, Big Data, Gadgets y Cultura Geek presentado por Jorge y Dalia.</description>
-    {item_xml}
+{items_block}
   </channel>
 </rss>"""
     rss_file.write_text(rss_content, encoding='utf-8')
-    # Also save a copy in root so GitHub Pages can serve it at /podcast.xml or /feed.xml
     root_rss = Path(r"C:\Carlos\noticias_podcast\podcast.xml")
     root_rss.write_text(rss_content, encoding='utf-8')
-    print(f"[OK] Feed RSS actualizado: {rss_file} y {root_rss}")
+    print(f"[OK] Feed RSS actualizado con {len(all_items)} episodios: {rss_file}")
 
 if __name__ == '__main__':
     # Test script if executed directly
