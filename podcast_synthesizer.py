@@ -129,8 +129,8 @@ async def process_dialogue(script_text: str, episode_title: str) -> Path:
         "-c:a", "libmp3lame",
         "-b:a", "192k",
         "-metadata", f"title={episode_title}",
-        "-metadata", "artist=Jorge y Dalia (NoticIAs Dúo)",
-        "-metadata", "album=NoticIAs Semanales",
+        "-metadata", "artist=Jorge y Dalia (Escucha sIA)",
+        "-metadata", "album=Escucha sIA",
         "-metadata", "genre=Podcast",
         "-metadata", f"date={datetime.now().strftime('%Y')}",
         str(final_output)
@@ -188,7 +188,7 @@ def update_podcast_rss(episode_title: str, filename: str, filepath: Path, email_
     rss_content = f"""<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
   <channel>
-    <title>NoticIAs Dúo Tech</title>
+    <title>Escucha sIA</title>
     <link>{base_url}</link>
     <language>es-mx</language>
     <itunes:author>Jorge y Dalia</itunes:author>
@@ -198,7 +198,7 @@ def update_podcast_rss(episode_title: str, filename: str, filepath: Path, email_
       <itunes:name>Carlos Corona</itunes:name>
       <itunes:email>{email_address}</itunes:email>
     </itunes:owner>
-    <description>Resumen y análisis técnico diario de noticias de IA, Cloud, Big Data, Gadgets y Anime en formato dúo conversacional con Jorge y Dalia.</description>
+    <description>Escucha sIA: El podcast diario de Inteligencia Artificial, Cloud, Big Data, Gadgets y Cultura Geek presentado por Jorge y Dalia.</description>
     {item_xml}
   </channel>
 </rss>"""

@@ -1,5 +1,7 @@
 {
-  "podcast_name": "NoticIAs Dúo Tech",
+  "podcast_name": "Escucha sIA",
   "owner_name": "Carlos Corona",
-  "owner_email": "charly.corona@gmail.com"
+  "owner_email": "charly.corona@gmail.com",
+  "hosts": ["Jorge", "Dalia"],
+  "genre": "Tecnología, Inteligencia Artificial & Big Data"
 }
