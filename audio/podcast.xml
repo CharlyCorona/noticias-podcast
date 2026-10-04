@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
   <channel>
-    <title>Escucha sIA</title>
+    <title>sIA</title>
     <link>https://charlycorona.github.io/noticias-podcast</link>
     <language>es-mx</language>
     <itunes:author>Jorge y Dalia</itunes:author>
@@ -11,12 +11,12 @@
       <itunes:name>Carlos Corona</itunes:name>
       <itunes:email>charly.corona@gmail.com</itunes:email>
     </itunes:owner>
-    <description>Escucha sIA: El podcast diario de Inteligencia Artificial, Cloud, Big Data, Gadgets y Cultura Geek presentado por Jorge y Dalia.</description>
+    <description>sIA: El podcast diario de Inteligencia Artificial, Cloud, Big Data, Gadgets y Cultura Geek presentado por Jorge y Dalia.</description>
     
     <item>
-      <title>Escucha sIA #1: Gemini 3.8, Agentic BigQuery, Android 17 y Sword Art Online</title>
+      <title>sIA #1: Gemini 3.8, Agentic BigQuery, Android 17 y Sword Art Online</title>
       <description>Episodio diario de NoticIAs: IA Generativa, Google AI Studio, Data Engineering, Gadgets y Cultura Geek con el dúo Jorge y Dalia.</description>
-      <pubDate>Sat, 03 Oct 2026 22:37:50 GMT</pubDate>
+      <pubDate>Sat, 03 Oct 2026 22:40:55 GMT</pubDate>
       <enclosure url="https://charlycorona.github.io/noticias-podcast/audio/NoticIAs_Duo_2026-10-03.mp3" length="6602157" type="audio/mpeg"/>
       <guid isPermaLink="true">https://charlycorona.github.io/noticias-podcast/audio/NoticIAs_Duo_2026-10-03.mp3</guid>
       <itunes:author>Jorge y Dalia</itunes:author>
