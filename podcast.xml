@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
+  <channel>
+    <title>NoticIAs Dúo Tech</title>
+    <link>https://charlycorona.github.io/noticias-podcast</link>
+    <language>es-mx</language>
+    <itunes:author>Jorge y Dalia</itunes:author>
+    <itunes:image href="https://charlycorona.github.io/noticias-podcast/cover.jpg"/>
+    <itunes:category text="Technology"/>
+    <description>Resumen y análisis técnico diario de noticias de IA, Cloud, Big Data, Gadgets y Anime en formato dúo conversacional con Jorge y Dalia.</description>
+    
+    <item>
+      <title>NoticIAs Dúo: Gemini 3.8, Agentic BigQuery, Android 17 y Sword Art Online</title>
+      <description>Episodio diario de NoticIAs: IA Generativa, Google AI Studio, Data Engineering, Gadgets y Cultura Geek con el dúo Jorge y Dalia.</description>
+      <pubDate>Sat, 03 Oct 2026 21:52:29 GMT</pubDate>
+      <enclosure url="https://charlycorona.github.io/noticias-podcast/audio/NoticIAs_Duo_2026-10-03.mp3" length="6602157" type="audio/mpeg"/>
+      <guid isPermaLink="true">https://charlycorona.github.io/noticias-podcast/audio/NoticIAs_Duo_2026-10-03.mp3</guid>
+      <itunes:author>Jorge y Dalia</itunes:author>
+      <itunes:image href="https://charlycorona.github.io/noticias-podcast/cover.jpg"/>
+      <itunes:explicit>no</itunes:explicit>
+    </item>
+  </channel>
+</rss>

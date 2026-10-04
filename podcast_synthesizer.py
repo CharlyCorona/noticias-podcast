@@ -1,0 +1,201 @@
+import sys
+import os
+import re
+import asyncio
+import subprocess
+from pathlib import Path
+from datetime import datetime
+import edge_tts
+
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
+
+VOICE_MALE = "es-MX-JorgeNeural"
+VOICE_FEMALE = "es-MX-DaliaNeural"
+
+AUDIO_DIR = Path(r"C:\Carlos\noticias_podcast\audio")
+SPOTIFY_DIR = Path(r"C:\Users\c_a_c\Music\NoticIAs")
+TEMP_DIR = Path(r"C:\Carlos\noticias_podcast\temp_chunks")
+
+AUDIO_DIR.mkdir(parents=True, exist_ok=True)
+SPOTIFY_DIR.mkdir(parents=True, exist_ok=True)
+TEMP_DIR.mkdir(parents=True, exist_ok=True)
+
+async def synthesize_chunk(text: str, voice: str, output_path: Path):
+    communicate = edge_tts.Communicate(text, voice)
+    await communicate.save(str(output_path))
+
+def clean_for_tts(text: str) -> str:
+    # Phonetic cleanups for TTS fluency
+    t = text.strip()
+    t = re.sub(r'[*_#`]', '', t)
+    # Expand acronyms for clean Spanish TTS reading
+    t = re.sub(r'\bGCP\b', 'G C P', t)
+    t = re.sub(r'\bAI Studio\b', 'A I Studio', t)
+    t = re.sub(r'\bGoogle AI\b', 'Google A I', t)
+    t = re.sub(r'\bdbt\b', 'd b t', t)
+    t = re.sub(r'\bBigQuery\b', 'Big-Kueri', t)
+    t = re.sub(r'\bSoC\b', 'S o C', t)
+    t = re.sub(r'\bSAO\b', 'S A O', t)
+    t = re.sub(r'\bTTS\b', 'T T S', t)
+    t = re.sub(r'\bAPI\b', 'A P I', t)
+    t = re.sub(r'\bOne UI\b', 'Uan U I', t)
+    return t
+
+async def process_dialogue(script_text: str, episode_title: str) -> Path:
+    lines = script_text.strip().split('\n')
+    chunks = []
+    chunk_index = 0
+    
+    # Clean temp dir
+    for f in TEMP_DIR.glob("*.mp3"):
+        try:
+            f.unlink()
+        except Exception:
+            pass
+
+    current_speaker = None
+    current_text = []
+
+    def commit_current_block():
+        nonlocal chunk_index
+        if current_speaker and current_text:
+            combined_text = " ".join(current_text).strip()
+            if combined_text:
+                cleaned = clean_for_tts(combined_text)
+                voice = VOICE_MALE if current_speaker == "JORGE" else VOICE_FEMALE
+                chunk_file = TEMP_DIR / f"chunk_{chunk_index:03d}_{current_speaker.lower()}.mp3"
+                chunks.append((chunk_file, cleaned, voice, current_speaker))
+                chunk_index += 1
+
+    for line in lines:
+        line_s = line.strip()
+        if not line_s:
+            continue
+            
+        if line_s.startswith('[SFX:') or line_s.startswith('[sfx:'):
+            # Sound effect marker
+            continue
+            
+        # Detect speaker
+        jorge_match = re.match(r'^(JORGE|HOST 1|LOCUTOR 1|CARLOS)\s*:\s*(.*)$', line_s, re.IGNORECASE)
+        dalia_match = re.match(r'^(DALIA|HOST 2|LOCUTOR 2|SOFIA|ELENA)\s*:\s*(.*)$', line_s, re.IGNORECASE)
+        
+        if jorge_match:
+            commit_current_block()
+            current_speaker = "JORGE"
+            current_text = [jorge_match.group(2)]
+        elif dalia_match:
+            commit_current_block()
+            current_speaker = "DALIA"
+            current_text = [dalia_match.group(2)]
+        else:
+            if current_speaker:
+                current_text.append(line_s)
+
+    commit_current_block()
+
+    if not chunks:
+        raise ValueError("No se encontraron intervenciones con formato 'JORGE:' o 'DALIA:' en el guion.")
+
+    print(f"Generando {len(chunks)} intervenciones de voz para el dúo...")
+    
+    # Synthesize each chunk
+    for idx, (chunk_file, text, voice, speaker) in enumerate(chunks, 1):
+        print(f"  [{idx}/{len(chunks)}] Sintetizando {speaker} ({voice}): \"{text[:40]}...\"")
+        await synthesize_chunk(text, voice, chunk_file)
+
+    # Create concat list for ffmpeg
+    concat_list_file = TEMP_DIR / "concat_list.txt"
+    with open(concat_list_file, 'w', encoding='utf-8') as f:
+        for chunk_file, _, _, _ in chunks:
+            # Escape path for ffmpeg concat
+            path_str = str(chunk_file).replace('\\', '/')
+            f.write(f"file '{path_str}'\n")
+
+    # Generate output filenames
+    today_str = datetime.now().strftime("%Y-%m-%d")
+    output_filename = f"NoticIAs_Duo_{today_str}.mp3"
+    final_output = AUDIO_DIR / output_filename
+    spotify_output = SPOTIFY_DIR / output_filename
+
+    print("\nEnsamblando audio con ffmpeg...")
+    # Concat and add ID3 metadata
+    cmd = [
+        "ffmpeg", "-y",
+        "-f", "concat",
+        "-safe", "0",
+        "-i", str(concat_list_file),
+        "-c:a", "libmp3lame",
+        "-b:a", "192k",
+        "-metadata", f"title={episode_title}",
+        "-metadata", "artist=Jorge y Dalia (NoticIAs Dúo)",
+        "-metadata", "album=NoticIAs Semanales",
+        "-metadata", "genre=Podcast",
+        "-metadata", f"date={datetime.now().strftime('%Y')}",
+        str(final_output)
+    ]
+    
+    res = subprocess.run(cmd, capture_output=True, text=True)
+    if res.returncode != 0:
+        print("Error en ffmpeg:", res.stderr)
+        raise RuntimeError("Fallo al ensamblar con ffmpeg")
+
+    # Copy to Spotify local directory
+    import shutil
+    shutil.copy2(final_output, spotify_output)
+    print(f"\n[OK] Episodio master generado en: {final_output}")
+    print(f"[OK] Sincronizado en carpeta de Spotify: {spotify_output}")
+
+    # Generate/Update RSS
+    update_podcast_rss(episode_title, output_filename, final_output)
+    return final_output
+
+def update_podcast_rss(episode_title: str, filename: str, filepath: Path):
+    rss_file = AUDIO_DIR / "podcast.xml"
+    file_size = filepath.stat().st_size
+    pub_date = datetime.now().strftime("%a, %d %b %Y %H:%M:%S GMT")
+    base_url = "https://charlycorona.github.io/noticias-podcast"
+    audio_url = f"{base_url}/audio/{filename}"
+    cover_url = f"{base_url}/cover.jpg"
+    
+    item_xml = f"""
+    <item>
+      <title>{episode_title}</title>
+      <description>Episodio diario de NoticIAs: IA Generativa, Google AI Studio, Data Engineering, Gadgets y Cultura Geek con el dúo Jorge y Dalia.</description>
+      <pubDate>{pub_date}</pubDate>
+      <enclosure url="{audio_url}" length="{file_size}" type="audio/mpeg"/>
+      <guid isPermaLink="true">{audio_url}</guid>
+      <itunes:author>Jorge y Dalia</itunes:author>
+      <itunes:image href="{cover_url}"/>
+      <itunes:explicit>no</itunes:explicit>
+    </item>"""
+
+    rss_content = f"""<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
+  <channel>
+    <title>NoticIAs Dúo Tech</title>
+    <link>{base_url}</link>
+    <language>es-mx</language>
+    <itunes:author>Jorge y Dalia</itunes:author>
+    <itunes:image href="{cover_url}"/>
+    <itunes:category text="Technology"/>
+    <description>Resumen y análisis técnico diario de noticias de IA, Cloud, Big Data, Gadgets y Anime en formato dúo conversacional con Jorge y Dalia.</description>
+    {item_xml}
+  </channel>
+</rss>"""
+    rss_file.write_text(rss_content, encoding='utf-8')
+    # Also save a copy in root so GitHub Pages can serve it at /podcast.xml or /feed.xml
+    root_rss = Path(r"C:\Carlos\noticias_podcast\podcast.xml")
+    root_rss.write_text(rss_content, encoding='utf-8')
+    print(f"[OK] Feed RSS actualizado: {rss_file} y {root_rss}")
+
+if __name__ == '__main__':
+    # Test script if executed directly
+    sample_script = """
+    JORGE: ¡Hola Carlos! Bienvenidos a NoticIAs Dúo, tu dosis técnica diaria para el camino.
+    DALIA: Hola a todos. Hoy tenemos noticias muy potentes en Google AI Studio, BigQuery y el despliegue de Android 17 en la serie S25 de Samsung.
+    JORGE: Así es Dalia. En Google anunciaron la transición de los clásicos Gems hacia Skills modulares en Workspace y Gemini.
+    DALIA: Y en el mundo geek, Reki Kawahara acaba de lanzar el tráiler de su nuevo anime y la próxima película de Sword Art Online. ¡Comencemos!
+    """
+    asyncio.run(process_dialogue(sample_script, "Piloto de Prueba - NoticIAs Dúo"))
