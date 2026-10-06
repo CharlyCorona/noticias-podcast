@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Fin de la Amnesia en LLMs: Context Caching, Memoria Persistente y Aprendizaje Anidado | sIA Digital Magazine</title>
+    <meta name="description" content="Superando la ventana de contexto efímera para construir agentes autónomos con memoria episódica jerárquica y experiencia acumulativa.">
+    <link rel="stylesheet" href="../assets/css/magazine.css">
+    <link rel="icon" type="image/jpeg" href="../cover.jpg">
+</head>
+<body>
+    <header class="navbar">
+        <div class="container nav-wrapper">
+            <a href="../index.html" class="brand">
+                <img src="../cover.jpg" alt="sIA Logo" class="brand-logo">
+                <div class="brand-text">
+                    <h1>sIA Journal</h1>
+                    <span>Revista Digital & Podcast Tech</span>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">Inicio</a>
+                <a href="../index.html#deep-dives" class="nav-link">Deep Dives</a>
+                <a href="../index.html#noticias" class="nav-link">NoticIAs</a>
+                <a href="https://open.spotify.com/show/3oNxteAETV5wvEIPN1KDVN" target="_blank" class="btn-pill btn-spotify">Spotify</a>
+                <a href="../podcast.xml" target="_blank" class="btn-pill btn-rss">Feed RSS</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="article-container">
+        <nav class="breadcrumbs">
+            <a href="../index.html">Revista sIA</a> &rsaquo; <span>Deep Dive</span> &rsaquo; <span>Artículo</span>
+        </nav>
+
+        <article>
+            <header class="article-header">
+                <span class="badge badge-purple">Deep Dive</span>
+                <h1 class="article-title">El Fin de la Amnesia en LLMs: Context Caching, Memoria Persistente y Aprendizaje Anidado</h1>
+                <p class="article-subtitle">Superando la ventana de contexto efímera para construir agentes autónomos con memoria episódica jerárquica y experiencia acumulativa.</p>
+
+                <div class="author-bar">
+                    <div>Investigación: <strong>Carlos Corona</strong> & <strong>sIA Editora</strong></div>
+                    <div>•</div>
+                    <div>Fecha: <strong>Sun, 04 Oct 2026 13:06:27 GMT</strong></div>
+                    <div>•</div>
+                    <div>Lectura: <strong>11 min</strong></div>
+                </div>
+            </header>
+
+            <!-- Embedded Audio Player -->
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 <strong>Escuchar episodio complementario de sIA:</strong></span>
+                    <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_Context_Caching_Memoria_Persistente.mp3" download>Descargar MP3</a>
+                </div>
+                <audio controls preload="metadata">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_Context_Caching_Memoria_Persistente.mp3" type="audio/mpeg">
+                    Tu navegador no soporta el reproductor de audio.
+                </audio>
+            </div>
+
+            <!-- Main Article Body -->
+            <div class="article-body">
+                <div class="thesis-callout">
+                    <h4>Tesis Central de Investigación</h4>
+                    <p>"El costo y la latencia asociados a reenviar repositorios y contextos masivos en cada inferencia han sido resueltos mediante Context Caching. La nueva frontera de la investigación es el 'aprendizaje anidado' (nested learning), donde los agentes podan y consolidan experiencias previas evitando la contaminación de contexto."</p>
+                </div>
+
+                <div style="background: rgba(148, 163, 184, 0.05); padding: 1rem 1.25rem; border-radius: 8px; margin-bottom: 2rem; font-size: 0.9rem; color: #94a3b8;">
+                    <strong>Nexo de Bitácora:</strong> Continúa la línea trazada en el episodio 'El fin de la amnesia crónica en IA' y 'Google Antigravity: La IA deja de ser copiloto'.
+                </div>
+
+                
+        <section class="article-section">
+            <h2>1. El Problema Histórico de la Amnesia en Agentes</h2>
+            <p>Tradicionalmente, los modelos de lenguaje de gran escala (LLMs) carecían de estado (<em>stateless</em>). Cada invocación requería reenviar la totalidad del historial, la documentación y el código fuente. Esto generaba dos graves barreras para el desarrollo de software agéntico: una latencia prohibitiva de varios segundos por llamada y costos astronómicos por procesamiento repetitivo de tokens de entrada.</p>
+        </section>
+        
+        <section class="article-section">
+            <h2>2. Arquitectura de Context Caching en Gemini</h2>
+            <p>Google introdujo <strong>Context Caching</strong> en la familia Gemini, permitiendo almacenar en memoria de GPU/TPU el estado precomputado de la atención (K-V cache) de fragmentos masivos de información (hasta 2 millones de tokens).</p>
+<ul>
+<li><strong>Reducción de Costos:</strong> El procesamiento de tokens cacheados tiene un descuento superior al 75% respecto a los tokens estándar de entrada.</li>
+<li><strong>Tiempo al Primer Token (TTFT):</strong> Se reduce drásticamente, permitiendo que agentes interactivos consulten bases de código gigantescas en milisegundos.</li>
+</ul>
+<p><em> <strong>Ciclos de Vida de Caché:</strong> Soporte para expiración automática basada en TTL (</em>Time to Live*) con posibilidad de actualización incremental.</p>
+        </section>
+        
+        <section class="article-section">
+            <h2>3. Memoria Jerárquica y el Peligro del 'Context Poisoning'</h2>
+            <p>Disponer de memoria infinita no garantiza inteligencia. Si un agente almacena conclusiones erróneas o alucinaciones en su memoria episódica, incurre en <em>Context Poisoning</em> (envenenamiento de contexto), sesgando negativamente todas sus ejecuciones posteriores. La arquitectura de memoria moderna exige tres niveles:</p>
+<p>1. <strong>Memoria de Trabajo:</strong> Datos volátiles de la sesión activa.</p>
+<p>2. <strong>Memoria Episódica:</strong> Historial de tareas, aciertos y fallos indexados con embeddings vectoriales.</p>
+<p>3. <strong>Memoria Semántica:</strong> Reglas inmutables del sistema y conocimiento formal de dominio.</p>
+        </section>
+        
+        <section class="article-section">
+            <h2>4. La Conexión Cultural: Fluctlights de Sword Art Online</h2>
+            <p>En el universo de <em>Sword Art Online: Alicization</em>, las inteligencias artificiales de abajo hacia arriba (<em>Bottom-up AI</em>) basadas en Fluctlights enfrentaban el colapso al alcanzar los 150 años debido a la saturación de memoria en su núcleo cuántico. Del mismo modo, en 2026 la ingeniería de prompts y agentes ya no consiste en retener todo, sino en diseñar algoritmos de poda (<em>pruning</em>) y abstracción periódica.</p>
+        </section>
+        
+
+                <!-- APA Bibliography Section -->
+                <section class="apa-section">
+                    <h3>📚 Referencias Bibliográficas (Formato APA 7ª Edición)</h3>
+                    <ul class="apa-list">
+                        <li class="apa-item">Google DeepMind. (2024). <em>Gemini 1.5: Unlocking multimodal understanding across millions of tokens of context</em>. arXiv preprint arXiv:2403.05530. <a href="https://doi.org/10.48550/arXiv.2403.05530" target="_blank" rel="noopener">https://doi.org/10.48550/arXiv.2403.05530</a></li>
+<li class="apa-item">Anthropic. (2024). <em>Prompt caching: Reducing latency and costs for multi-turn interactions</em>. Anthropic Research. <a href="https://www.anthropic.com/news/prompt-caching" target="_blank" rel="noopener">https://www.anthropic.com/news/prompt-caching</a></li>
+<li class="apa-item">Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, L., & Polosukhin, I. (2017). <em>Attention is all you need</em>. Advances in Neural Information Processing Systems, 30.</li>
+<li class="apa-item">Kawahara, R. (2012). <em>Sword Art Online 9: Alicization Beginning</em>. Dengeki Bunko.</li>
+
+                    </ul>
+                </section>
+            </div>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="../index.html">Revista Digital</a>
+                <a href="https://open.spotify.com/show/3oNxteAETV5wvEIPN1KDVN" target="_blank">Spotify Show</a>
+                <a href="../podcast.xml">Feed RSS</a>
+                <a href="https://github.com/CharlyCorona/noticias-podcast" target="_blank">GitHub Repository</a>
+            </div>
+            <p>&copy; 2026 sIA Tech Media — Curaduría, Arquitectura & Rigor Técnico por Carlos Corona.</p>
+        </div>
+    </footer>
+</body>
+</html>

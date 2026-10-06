@@ -221,6 +221,13 @@ def update_podcast_rss(episode_title: str, filename: str, filepath: Path, email_
     root_rss = Path(r"C:\Carlos\noticias_podcast\podcast.xml")
     root_rss.write_text(rss_content, encoding='utf-8')
     print(f"[OK] Feed RSS actualizado con {len(all_items)} episodios: {rss_file}")
+    
+    # Auto-rebuild digital magazine and APA research articles
+    try:
+        from build_magazine import build_all_articles
+        build_all_articles()
+    except Exception as e:
+        print(f"[WARN] Error al regenerar revista digital: {e}")
 
 if __name__ == '__main__':
     # Test script if executed directly

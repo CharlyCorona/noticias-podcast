@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sIA Journal | Revista Digital de Inteligencia Artificial & Ingeniería de Datos</title>
+    <meta name="description" content="Revista técnica y compendio de podcasts de Inteligencia Artificial, Cloud, Big Data y Cultura Geek por Carlos Corona.">
+    <link rel="stylesheet" href="assets/css/magazine.css">
+    <link rel="icon" type="image/jpeg" href="cover.jpg">
+</head>
+<body>
+    <header class="navbar">
+        <div class="container nav-wrapper">
+            <a href="index.html" class="brand">
+                <img src="cover.jpg" alt="sIA Logo" class="brand-logo">
+                <div class="brand-text">
+                    <h1>sIA Journal</h1>
+                    <span>Revista Digital & Podcast Tech</span>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="#articulos" class="nav-link">Artículos</a>
+                <a href="https://open.spotify.com/show/3oNxteAETV5wvEIPN1KDVN" target="_blank" class="btn-pill btn-spotify">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                    Spotify Show
+                </a>
+                <a href="podcast.xml" target="_blank" class="btn-pill btn-rss">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248-1.796 0-3.252-1.454-3.252-3.248 0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05 0 10.96 4.91 10.96 10.96h4.811c0-8.7-7.072-15.771-15.771-15.771zm0-8.18v4.811c10.564 0 19.141 8.577 19.141 19.141h4.811c0-13.22-10.732-23.952-23.952-23.952z"/></svg>
+                    Feed RSS
+                </a>
+                <a href="https://github.com/CharlyCorona/noticias-podcast" target="_blank" class="btn-pill">GitHub</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <span class="hero-tagline">Revista de Investigación & Ecosistema Agéntico</span>
+            <h2>Conocimiento Profundo,<br>Rigor Técnico y Visión de Futuro</h2>
+            <p>Cada episodio de podcast se respalda en un artículo de investigación con análisis de arquitectura, trade-offs de producción y bibliografía en formato APA.</p>
+            
+            <div class="filter-bar">
+                <button class="filter-btn active" onclick="filterArticles('all')">Todos (27)</button>
+                <button class="filter-btn" onclick="filterArticles('deep-dive')">sIA Deep Dives</button>
+                <button class="filter-btn" onclick="filterArticles('noticias')">NoticIAs Daily</button>
+                <button class="filter-btn" onclick="filterArticles('archivo')">Archivo Histórico</button>
+            </div>
+        </div>
+    </section>
+
+    <main class="container" id="articulos">
+        <div class="magazine-grid">
+            
+        <div class="card badge-cyan" data-category="deep-dive">
+            <div class="card-header">
+                <span class="badge badge-cyan">Deep Dive</span>
+                <span class="card-meta">8 min • Sun, 04 Oct</span>
+            </div>
+            <h3>Inferencia en el Borde vs Nube: El NPU del Galaxy S25 y Video 360 con la Insta360 X4</h3>
+            <p>Por qué la soberanía de datos, la latencia cero y el video computacional 8K dependen del silicio neuronal en tu bolsillo....</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_Edge_AI_Galaxy_S25_Insta360.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/edge-ai-galaxy-s25-insta360-silicio.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_Edge_AI_Galaxy_S25_Insta360.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        <div class="card badge-emerald" data-category="deep-dive">
+            <div class="card-header">
+                <span class="badge badge-emerald">Deep Dive</span>
+                <span class="card-meta">10 min • Sun, 04 Oct</span>
+            </div>
+            <h3>Data Mesh en Retail de Escala Masiva: Contratos Semánticos y Streaming Continuo</h3>
+            <p>Descentralización de datos en gigantes omnicanal, Data Products federados con dbt y la muerte de las tuberías monolíticas frágiles....</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_Data_Mesh_Retail_Streaming.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/data-mesh-retail-streaming-contratos.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_Data_Mesh_Retail_Streaming.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        <div class="card badge-purple" data-category="deep-dive">
+            <div class="card-header">
+                <span class="badge badge-purple">Deep Dive</span>
+                <span class="card-meta">11 min • Sun, 04 Oct</span>
+            </div>
+            <h3>El Fin de la Amnesia en LLMs: Context Caching, Memoria Persistente y Aprendizaje Anidado</h3>
+            <p>Superando la ventana de contexto efímera para construir agentes autónomos con memoria episódica jerárquica y experiencia acumulativa....</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_Context_Caching_Memoria_Persistente.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/context-caching-memoria-persistente-llms.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_Context_Caching_Memoria_Persistente.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        <div class="card badge-cyan" data-category="deep-dive">
+            <div class="card-header">
+                <span class="badge badge-cyan">Deep Dive</span>
+                <span class="card-meta">9 min • Sun, 04 Oct</span>
+            </div>
+            <h3>BigQuery Gemini Cloud Assist: La Muerte de las Consultas Manuales y el Auge del Arquitecto Semántico</h3>
+            <p>Cómo la analítica conversacional sobre grafos de metadatos y Dataplex desplaza el valor del Data Engineer del SQL artesanal a la modelación y gobernanza....</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_BigQuery_Gemini_Cloud_Assist.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/bigquery-gemini-cloud-assist-arquitectura.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_BigQuery_Gemini_Cloud_Assist.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        <div class="card badge-purple" data-category="deep-dive">
+            <div class="card-header">
+                <span class="badge badge-purple">Deep Dive</span>
+                <span class="card-meta">9 min • Sun, 04 Oct</span>
+            </div>
+            <h3>Model Context Protocol (MCP) y Agentes Autónomos: El Nuevo Bus de Integración de Sistemas</h3>
+            <p>Cómo el protocolo abierto de Anthropic y adoptado por la industria sustituye a las APIs REST para conectar IAs con herramientas del mundo real....</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_MCP_Agentes_Produccion.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/mcp-model-context-protocol-agentes-produccion.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_MCP_Agentes_Produccion.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        <div class="card badge-cyan" data-category="archivo">
+            <div class="card-header">
+                <span class="badge badge-cyan">sIA Noticias</span>
+                <span class="card-meta">7 min • Sat, 03 Oct</span>
+            </div>
+            <h3>De Plomeros a Arquitectos de Contexto: La Trampa del Vibe Coding y el Auge de Antigravity</h3>
+            <p>Por qué el 80% del código generado por IA es una trampa de deuda técnica y cómo el 'Vibe Reviewing' define al ingeniero senior en 2026....</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_Episodio_02_Arquitectos_de_Contexto.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/de-plomeros-a-arquitectos-de-contexto-vibe-coding.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_Episodio_02_Arquitectos_de_Contexto.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        <div class="card badge-emerald" data-category="archivo">
+            <div class="card-header">
+                <span class="badge badge-emerald">sIA Noticias</span>
+                <span class="card-meta">6 min • Sat, 03 Oct</span>
+            </div>
+            <h3>sIA #1: Gemini 3.8, Agentic BigQuery, Android 17 y Sword Art Online Integral Domain</h3>
+            <p>El debut matutino de Jorge y Dalia: cuotas en Google AI Studio, dbt MCP en VS Code, One UI 9 y novedades de Reki Kawahara....</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/NoticIAs_Duo_2026-10-03.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/noticias-gemini-38-agentic-bigquery-android17-sao.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/NoticIAs_Duo_2026-10-03.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        <div class="card badge-emerald" data-category="archivo">
+            <div class="card-header">
+                <span class="badge badge-emerald">Archivo Histórico</span>
+                <span class="card-meta">8 min • Fri, 11 Sep</span>
+            </div>
+            <h3>5 claves que transforman la integración de datos</h3>
+            <p>Investigación histórica de sIA preservada en la bitácora: Capítulo histórico de sIA: 5 claves que transforman la integración de datos. Análisis e investigación ...</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_01_5_claves_que_transforman_la_integracion_de_datos.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/sia-5-claves-que-transforman-la-integracion-de-datos.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_01_5_claves_que_transforman_la_integracion_de_datos.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        <div class="card badge-emerald" data-category="archivo">
+            <div class="card-header">
+                <span class="badge badge-emerald">Archivo Histórico</span>
+                <span class="card-meta">8 min • Sat, 12 Sep</span>
+            </div>
+            <h3>Adiós Tuberías, Hola Ecosistema Vivo: Los 5 Frameworks de Integración de Datos que Definen la Ingeniería del Futuro (Metadatos, Eventos e IA)</h3>
+            <p>Investigación histórica de sIA preservada en la bitácora: Capítulo histórico de sIA: Adiós Tuberías, Hola Ecosistema Vivo: Los 5 Frameworks de Integración de Da...</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_02_Adios_Tuberias_Hola_Ecosistema_Vivo_Los_5_Frameworks_de_Inte.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/sia-adios-tuberias-hola-ecosistema-vivo-los-5-frameworks-de-.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_02_Adios_Tuberias_Hola_Ecosistema_Vivo_Los_5_Frameworks_de_Inte.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        <div class="card badge-emerald" data-category="archivo">
+            <div class="card-header">
+                <span class="badge badge-emerald">Archivo Histórico</span>
+                <span class="card-meta">8 min • Sun, 13 Sep</span>
+            </div>
+            <h3>Antigravity La IA deja de ser copiloto</h3>
+            <p>Investigación histórica de sIA preservada en la bitácora: Capítulo histórico de sIA: Antigravity La IA deja de ser copiloto. Análisis e investigación sobre arqu...</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_03_Antigravity_La_IA_deja_de_ser_copiloto.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/sia-antigravity-la-ia-deja-de-ser-copiloto.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_03_Antigravity_La_IA_deja_de_ser_copiloto.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        <div class="card badge-emerald" data-category="archivo">
+            <div class="card-header">
+                <span class="badge badge-emerald">Archivo Histórico</span>
+                <span class="card-meta">8 min • Mon, 14 Sep</span>
+            </div>
+            <h3>Arquitecto de Inteligencia vs El Fontanero de Datos</h3>
+            <p>Investigación histórica de sIA preservada en la bitácora: Capítulo histórico de sIA: Arquitecto de Inteligencia vs El Fontanero de Datos. Análisis e investigaci...</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_04_Arquitecto_de_Inteligencia_vs_El_Fontanero_de_Datos.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/sia-arquitecto-de-inteligencia-vs-el-fontanero-de-datos.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_04_Arquitecto_de_Inteligencia_vs_El_Fontanero_de_Datos.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        <div class="card badge-emerald" data-category="archivo">
+            <div class="card-header">
+                <span class="badge badge-emerald">Archivo Histórico</span>
+                <span class="card-meta">8 min • Tue, 15 Sep</span>
+            </div>
+            <h3>Convierte a Claude en tu empleado técnico</h3>
+            <p>Investigación histórica de sIA preservada en la bitácora: Capítulo histórico de sIA: Convierte a Claude en tu empleado técnico. Análisis e investigación sobre a...</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_05_Convierte_a_Claude_en_tu_empleado_tecnico.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/sia-convierte-a-claude-en-tu-empleado-tecnico.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_05_Convierte_a_Claude_en_tu_empleado_tecnico.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        <div class="card badge-emerald" data-category="archivo">
+            <div class="card-header">
+                <span class="badge badge-emerald">Archivo Histórico</span>
+                <span class="card-meta">8 min • Wed, 16 Sep</span>
+            </div>
+            <h3>Data Mesh No Es Tecnología Es Gente y Estructura</h3>
+            <p>Investigación histórica de sIA preservada en la bitácora: Capítulo histórico de sIA: Data Mesh No Es Tecnología Es Gente y Estructura. Análisis e investigación ...</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_06_Data_Mesh_No_Es_Tecnologia_Es_Gente_y_Estructura.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/sia-data-mesh-no-es-tecnologia-es-gente-y-estructura.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_06_Data_Mesh_No_Es_Tecnologia_Es_Gente_y_Estructura.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        <div class="card badge-emerald" data-category="archivo">
+            <div class="card-header">
+                <span class="badge badge-emerald">Archivo Histórico</span>
+                <span class="card-meta">8 min • Thu, 17 Sep</span>
+            </div>
+            <h3>De plomeros a arquitectos de contexto</h3>
+            <p>Investigación histórica de sIA preservada en la bitácora: Capítulo histórico de sIA: De plomeros a arquitectos de contexto. Análisis e investigación sobre arqui...</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_07_De_plomeros_a_arquitectos_de_contexto.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/sia-de-plomeros-a-arquitectos-de-contexto.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_07_De_plomeros_a_arquitectos_de_contexto.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        <div class="card badge-emerald" data-category="archivo">
+            <div class="card-header">
+                <span class="badge badge-emerald">Archivo Histórico</span>
+                <span class="card-meta">8 min • Fri, 18 Sep</span>
+            </div>
+            <h3>Deriva Semántica y Modernización: Cómo Rescatar el Significado de tus Datos con Metadatos Inteligentes</h3>
+            <p>Investigación histórica de sIA preservada en la bitácora: Capítulo histórico de sIA: Deriva Semántica y Modernización: Cómo Rescatar el Significado de tus Datos...</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_08_Deriva_Semantica_y_Modernizacion_Como_Rescatar_el_Significad.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/sia-deriva-semantica-y-modernizacion-como-rescatar-el-signif.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_08_Deriva_Semantica_y_Modernizacion_Como_Rescatar_el_Significad.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        <div class="card badge-emerald" data-category="archivo">
+            <div class="card-header">
+                <span class="badge badge-emerald">Archivo Histórico</span>
+                <span class="card-meta">8 min • Sat, 19 Sep</span>
+            </div>
+            <h3>El Costo Invisible de Big Data: Ingeniería de Datos, Huella Energética y la Urgencia de la Sostenibilidad</h3>
+            <p>Investigación histórica de sIA preservada en la bitácora: Capítulo histórico de sIA: El Costo Invisible de Big Data: Ingeniería de Datos, Huella Energética y la...</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_09_El_Costo_Invisible_de_Big_Data_Ingenieria_de_Datos_Huella_En.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/sia-el-costo-invisible-de-big-data-ingenieria-de-datos-huell.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_09_El_Costo_Invisible_de_Big_Data_Ingenieria_de_Datos_Huella_En.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        <div class="card badge-emerald" data-category="archivo">
+            <div class="card-header">
+                <span class="badge badge-emerald">Archivo Histórico</span>
+                <span class="card-meta">8 min • Sun, 20 Sep</span>
+            </div>
+            <h3>El Dilema de Big Data: De la Arquitectura Lambda a Kappa (¿Velocidad vs. Precisión)</h3>
+            <p>Investigación histórica de sIA preservada en la bitácora: Capítulo histórico de sIA: El Dilema de Big Data: De la Arquitectura Lambda a Kappa (¿Velocidad vs. Pr...</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_10_El_Dilema_de_Big_Data_De_la_Arquitectura_Lambda_a_Kappa_Velo.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/sia-el-dilema-de-big-data-de-la-arquitectura-lambda-a-kappa-.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_10_El_Dilema_de_Big_Data_De_la_Arquitectura_Lambda_a_Kappa_Velo.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        <div class="card badge-emerald" data-category="archivo">
+            <div class="card-header">
+                <span class="badge badge-emerald">Archivo Histórico</span>
+                <span class="card-meta">8 min • Mon, 21 Sep</span>
+            </div>
+            <h3>El fin de la amnesia crónica en IA</h3>
+            <p>Investigación histórica de sIA preservada en la bitácora: Capítulo histórico de sIA: El fin de la amnesia crónica en IA. Análisis e investigación sobre arquitec...</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_11_El_fin_de_la_amnesia_cronica_en_IA.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/sia-el-fin-de-la-amnesia-cronica-en-ia.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_11_El_fin_de_la_amnesia_cronica_en_IA.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        <div class="card badge-emerald" data-category="archivo">
+            <div class="card-header">
+                <span class="badge badge-emerald">Archivo Histórico</span>
+                <span class="card-meta">8 min • Tue, 22 Sep</span>
+            </div>
+            <h3>IA La burbuja financiera que se autoalimenta</h3>
+            <p>Investigación histórica de sIA preservada en la bitácora: Capítulo histórico de sIA: IA La burbuja financiera que se autoalimenta. Análisis e investigación sobr...</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_12_IA_La_burbuja_financiera_que_se_autoalimenta.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/sia-ia-la-burbuja-financiera-que-se-autoalimenta.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_12_IA_La_burbuja_financiera_que_se_autoalimenta.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        <div class="card badge-emerald" data-category="archivo">
+            <div class="card-header">
+                <span class="badge badge-emerald">Archivo Histórico</span>
+                <span class="card-meta">8 min • Wed, 23 Sep</span>
+            </div>
+            <h3>IA que razona antes de actuar</h3>
+            <p>Investigación histórica de sIA preservada en la bitácora: Capítulo histórico de sIA: IA que razona antes de actuar. Análisis e investigación sobre arquitectura ...</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_13_IA_que_razona_antes_de_actuar.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/sia-ia-que-razona-antes-de-actuar.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_13_IA_que_razona_antes_de_actuar.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        <div class="card badge-emerald" data-category="archivo">
+            <div class="card-header">
+                <span class="badge badge-emerald">Archivo Histórico</span>
+                <span class="card-meta">8 min • Thu, 24 Sep</span>
+            </div>
+            <h3>Lambda vs. Kappa: El Dilema de los Datos en México: ¿¿Velocidad Instantánea o Precisión Histórica?</h3>
+            <p>Investigación histórica de sIA preservada en la bitácora: Capítulo histórico de sIA: Lambda vs. Kappa: El Dilema de los Datos en México: ¿¿Velocidad Instantánea...</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_14_Lambda_vs_Kappa_El_Dilema_de_los_Datos_en_Mexico_¿Velocidad_I.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/sia-lambda-vs-kappa-el-dilema-de-los-datos-en-mexico-velocid.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_14_Lambda_vs_Kappa_El_Dilema_de_los_Datos_en_Mexico_¿Velocidad_I.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        <div class="card badge-emerald" data-category="archivo">
+            <div class="card-header">
+                <span class="badge badge-emerald">Archivo Histórico</span>
+                <span class="card-meta">8 min • Fri, 25 Sep</span>
+            </div>
+            <h3>Máquina del Tiempo de los Datos: Simplifica el Análisis Histórico con Vistas de Instantánea (SCD2 y Esquemas Estrella)</h3>
+            <p>Investigación histórica de sIA preservada en la bitácora: Capítulo histórico de sIA: Máquina del Tiempo de los Datos: Simplifica el Análisis Histórico con Vista...</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_15_Maquina_del_Tiempo_de_los_Datos_Simplifica_el_Analisis_Histo.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/sia-maquina-del-tiempo-de-los-datos-simplifica-el-analisis-h.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_15_Maquina_del_Tiempo_de_los_Datos_Simplifica_el_Analisis_Histo.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        <div class="card badge-emerald" data-category="archivo">
+            <div class="card-header">
+                <span class="badge badge-emerald">Archivo Histórico</span>
+                <span class="card-meta">8 min • Sat, 26 Sep</span>
+            </div>
+            <h3>Siete Métricas Post Lanzamiento para Confianza en Datos</h3>
+            <p>Investigación histórica de sIA preservada en la bitácora: Capítulo histórico de sIA: Siete Métricas Post Lanzamiento para Confianza en Datos. Análisis e investi...</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_16_Siete_Metricas_Post_Lanzamiento_para_Confianza_en_Datos.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/sia-siete-metricas-post-lanzamiento-para-confianza-en-datos.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_16_Siete_Metricas_Post_Lanzamiento_para_Confianza_en_Datos.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        <div class="card badge-emerald" data-category="archivo">
+            <div class="card-header">
+                <span class="badge badge-emerald">Archivo Histórico</span>
+                <span class="card-meta">8 min • Sun, 27 Sep</span>
+            </div>
+            <h3>Siete Métricas para Confiar en tus Datos</h3>
+            <p>Investigación histórica de sIA preservada en la bitácora: Capítulo histórico de sIA: Siete Métricas para Confiar en tus Datos. Análisis e investigación sobre ar...</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_17_Siete_Metricas_para_Confiar_en_tus_Datos.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/sia-siete-metricas-para-confiar-en-tus-datos.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_17_Siete_Metricas_para_Confiar_en_tus_Datos.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        <div class="card badge-emerald" data-category="archivo">
+            <div class="card-header">
+                <span class="badge badge-emerald">Archivo Histórico</span>
+                <span class="card-meta">8 min • Mon, 28 Sep</span>
+            </div>
+            <h3>Tu Segundo Cerebro Digital con C.O.D.E. y P.A.R.A.</h3>
+            <p>Investigación histórica de sIA preservada en la bitácora: Capítulo histórico de sIA: Tu Segundo Cerebro Digital con C.O.D.E. y P.A.R.A.. Análisis e investigació...</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_18_Tu_Segundo_Cerebro_Digital_con_C_O_D_E_y_P_A_R_A.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/sia-tu-segundo-cerebro-digital-con-c-o-d-e-y-p-a-r-a.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_18_Tu_Segundo_Cerebro_Digital_con_C_O_D_E_y_P_A_R_A.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        <div class="card badge-emerald" data-category="archivo">
+            <div class="card-header">
+                <span class="badge badge-emerald">Archivo Histórico</span>
+                <span class="card-meta">8 min • Tue, 29 Sep</span>
+            </div>
+            <h3>VSCode centro de mando para arquitectura viva</h3>
+            <p>Investigación histórica de sIA preservada en la bitácora: Capítulo histórico de sIA: VSCode centro de mando para arquitectura viva. Análisis e investigación sob...</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_19_VSCode_centro_de_mando_para_arquitectura_viva.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/sia-vscode-centro-de-mando-para-arquitectura-viva.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_19_VSCode_centro_de_mando_para_arquitectura_viva.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        <div class="card badge-emerald" data-category="archivo">
+            <div class="card-header">
+                <span class="badge badge-emerald">Archivo Histórico</span>
+                <span class="card-meta">8 min • Wed, 30 Sep</span>
+            </div>
+            <h3>Vibe coding y la ilusión de competencia</h3>
+            <p>Investigación histórica de sIA preservada en la bitácora: Capítulo histórico de sIA: Vibe coding y la ilusión de competencia. Análisis e investigación sobre arq...</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_20_Vibe_coding_y_la_ilusion_de_competencia.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/sia-vibe-coding-y-la-ilusion-de-competencia.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_Archivo_20_Vibe_coding_y_la_ilusion_de_competencia.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="index.html">Inicio</a>
+                <a href="https://open.spotify.com/show/3oNxteAETV5wvEIPN1KDVN" target="_blank">Spotify Show</a>
+                <a href="podcast.xml">Feed RSS</a>
+                <a href="https://github.com/CharlyCorona/noticias-podcast" target="_blank">GitHub Repository</a>
+            </div>
+            <p>&copy; 2026 sIA Tech Media — Curaduría, Arquitectura & Rigor Técnico por Carlos Corona.</p>
+        </div>
+    </footer>
+
+    <script>
+        function filterArticles(category) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

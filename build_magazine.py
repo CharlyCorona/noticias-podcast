@@ -1,0 +1,1305 @@
+"""
+sIA Digital Magazine & APA Research Article Builder
+Genera la revista digital en GitHub Pages (index.html, articulos/*.html, CSS)
+y vincula bidireccionalmente los podcasts en podcast.xml.
+"""
+
+import re
+import os
+import json
+import unicodedata
+from pathlib import Path
+from datetime import datetime
+
+BASE_DIR = Path(r"C:\Carlos\noticias_podcast")
+ARTICULOS_DIR = BASE_DIR / "articulos"
+ASSETS_DIR = BASE_DIR / "assets"
+CSS_DIR = ASSETS_DIR / "css"
+AUDIO_DIR = BASE_DIR / "audio"
+XML_FILE = BASE_DIR / "podcast.xml"
+AUDIO_XML_FILE = AUDIO_DIR / "podcast.xml"
+
+ARTICULOS_DIR.mkdir(parents=True, exist_ok=True)
+CSS_DIR.mkdir(parents=True, exist_ok=True)
+
+BASE_URL = "https://charlycorona.github.io/noticias-podcast"
+GITHUB_REPO_URL = "https://github.com/CharlyCorona/noticias-podcast"
+SPOTIFY_SHOW_URL = "https://open.spotify.com/show/3oNxteAETV5wvEIPN1KDVN"
+
+# ==============================================================================
+# BASE DE CONOCIMIENTO DE INVESTIGACIÓN CON BIBLIOGRAFÍA APA
+# ==============================================================================
+RESEARCH_DATABASE = {
+    # 1. BigQuery Gemini Cloud Assist
+    "sIA_DeepDive_BigQuery_Gemini_Cloud_Assist.mp3": {
+        "slug": "bigquery-gemini-cloud-assist-arquitectura",
+        "category": "Deep Dive",
+        "badge_color": "cyan",
+        "read_time": "9 min",
+        "title": "BigQuery Gemini Cloud Assist: La Muerte de las Consultas Manuales y el Auge del Arquitecto Semántico",
+        "subtitle": "Cómo la analítica conversacional sobre grafos de metadatos y Dataplex desplaza el valor del Data Engineer del SQL artesanal a la modelación y gobernanza.",
+        "thesis": "La inteligencia artificial integrada directamente en el motor de ejecución analítico elimina la ventaja competitiva de escribir SQL complejo manualmente. El nuevo cuello de botella reside en la definición estricta de contratos semánticos y políticas de linaje que impidan que los modelos generen alucinaciones sobre supuestos erróneos.",
+        "nexo": "Este análisis expande las investigaciones previas registradas en nuestra bitácora sobre Bases de Datos Vectoriales y la transición de 'plomeros de datos a arquitectos de contexto'.",
+        "content_blocks": [
+            {
+                "title": "1. El Cambio de Paradigma: De la Sintaxis SQL al Contexto Semántico",
+                "body": """
+Durante más de cuatro décadas, el valor técnico de analistas e ingenieros de datos estuvo fuertemente ligado a su capacidad para optimizar consultas complejas en SQL: dominar window functions, diseñar particiones y afinar joins sobre tablas masivas. Con el despliegue de **Gemini Cloud Assist** dentro de Google Cloud BigQuery Studio, esta dinámica ha cambiado para siempre.
+
+Gemini no actúa como un simple autocompletador de código; comprende el contexto de esquemas, relaciones foráneas, perfiles de datos en **Dataplex** y patrones de consulta históricos para generar código SQL ejecutable a partir de lenguaje natural. Esto permite a los equipos de negocio explorar petabytes de información en segundos. Sin embargo, este superpoder expone una debilidad estructural latente: si la infraestructura subyacente carece de un modelo semántico formal, la IA asume definiciones por defecto que pueden inducir a errores millonarios.
+"""
+            },
+            {
+                "title": "2. Anatomía Técnica: Cómo Opera Gemini Cloud Assist Bajo el Capó",
+                "body": """
+El motor de Gemini en BigQuery opera sobre tres componentes fundamentales de la arquitectura de Google Cloud:
+
+* **Grafo de Metadatos y Linaje de Dataplex:** Antes de procesar el prompt del usuario, el asistente inspecciona las descripciones de columnas, etiquetas de gobernanza y dependencias de linaje.
+* **Optimizador de Planes de Ejecución:** Gemini analiza el *Query Execution Plan*, recomendando la adición de índices de búsqueda vectorial, clustering inteligente o particionamiento por fecha de ingestión para minimizar el escaneo de slots y reducir costos de cómputo.
+* **Integración con Model Context Protocol (MCP) y dbt:** Permite que las definiciones de métricas declaradas en dbt Semantic Layer se utilicen como fuente de verdad inmutable antes de que el modelo redacte una sola cláusula `WHERE` o `GROUP BY`.
+"""
+            },
+            {
+                "title": "3. El Debate Crítico: Riesgos de Alucinación Silenciosa y Sobrecarga Financiera",
+                "body": """
+El riesgo más peligroso en analítica asistida por IA no es el error de sintaxis que hace fallar la consulta, sino la **alucinación silenciosa**: una consulta perfectamente válida que retorna números plausibles pero metodológicamente incorrectos. Si un analista solicita *"margen operativo neto por tienda"*, el modelo puede omitir notas de crédito o retenciones fiscales no documentadas explícitamente en el catálogo.
+
+Asimismo, la formulación descuidada de consultas en lenguaje natural puede generar escaneos de tablas completas de cientos de terabytes si no se configuran límites estrictos de bytes facturados en los proyectos de GCP (`maximum_bytes_billed`).
+"""
+            },
+            {
+                "title": "4. Conclusión Estratégica y Recomendaciones de Implementación",
+                "body": """
+El rol del Ingeniero de Datos en 2026 evoluciona de 'escritor de queries' a 'auditor de verdad semántica'. Las organizaciones que adopten Gemini en BigQuery deben priorizar:
+1. Documentación rigurosa de metadatos mediante catálogos centralizados en Dataplex.
+2. Contratos de datos semánticos que congelen la lógica de cálculo de las métricas clave del negocio.
+3. Alertas de cuotas y políticas de prevención de escaneos masivos en BigQuery Reservation.
+"""
+            }
+        ],
+        "apa_references": [
+            "Google Cloud. (2026). *Gemini in BigQuery: AI-powered assistance for data analytics*. Google Cloud Documentation. https://cloud.google.com/bigquery/docs/gemini-overview",
+            "Dehghani, Z. (2022). *Data Mesh: Delivering data-driven value at scale*. O'Reilly Media.",
+            "dbt Labs. (2025). *Semantic layer and the Model Context Protocol for enterprise analytics*. dbt Blog. https://blog.getdbt.com/semantic-layer-mcp",
+            "Karpathy, A. (2023). *Software 2.0 and the evolution of data-driven systems*. Andrej Karpathy Blog. https://karpathy.github.io"
+        ]
+    },
+
+    # 2. Context Caching y Memoria Persistente
+    "sIA_DeepDive_Context_Caching_Memoria_Persistente.mp3": {
+        "slug": "context-caching-memoria-persistente-llms",
+        "category": "Deep Dive",
+        "badge_color": "purple",
+        "read_time": "11 min",
+        "title": "El Fin de la Amnesia en LLMs: Context Caching, Memoria Persistente y Aprendizaje Anidado",
+        "subtitle": "Superando la ventana de contexto efímera para construir agentes autónomos con memoria episódica jerárquica y experiencia acumulativa.",
+        "thesis": "El costo y la latencia asociados a reenviar repositorios y contextos masivos en cada inferencia han sido resueltos mediante Context Caching. La nueva frontera de la investigación es el 'aprendizaje anidado' (nested learning), donde los agentes podan y consolidan experiencias previas evitando la contaminación de contexto.",
+        "nexo": "Continúa la línea trazada en el episodio 'El fin de la amnesia crónica en IA' y 'Google Antigravity: La IA deja de ser copiloto'.",
+        "content_blocks": [
+            {
+                "title": "1. El Problema Histórico de la Amnesia en Agentes",
+                "body": """
+Tradicionalmente, los modelos de lenguaje de gran escala (LLMs) carecían de estado (*stateless*). Cada invocación requería reenviar la totalidad del historial, la documentación y el código fuente. Esto generaba dos graves barreras para el desarrollo de software agéntico: una latencia prohibitiva de varios segundos por llamada y costos astronómicos por procesamiento repetitivo de tokens de entrada.
+"""
+            },
+            {
+                "title": "2. Arquitectura de Context Caching en Gemini",
+                "body": """
+Google introdujo **Context Caching** en la familia Gemini, permitiendo almacenar en memoria de GPU/TPU el estado precomputado de la atención (K-V cache) de fragmentos masivos de información (hasta 2 millones de tokens).
+
+* **Reducción de Costos:** El procesamiento de tokens cacheados tiene un descuento superior al 75% respecto a los tokens estándar de entrada.
+* **Tiempo al Primer Token (TTFT):** Se reduce drásticamente, permitiendo que agentes interactivos consulten bases de código gigantescas en milisegundos.
+* **Ciclos de Vida de Caché:** Soporte para expiración automática basada en TTL (*Time to Live*) con posibilidad de actualización incremental.
+"""
+            },
+            {
+                "title": "3. Memoria Jerárquica y el Peligro del 'Context Poisoning'",
+                "body": """
+Disponer de memoria infinita no garantiza inteligencia. Si un agente almacena conclusiones erróneas o alucinaciones en su memoria episódica, incurre en *Context Poisoning* (envenenamiento de contexto), sesgando negativamente todas sus ejecuciones posteriores. La arquitectura de memoria moderna exige tres niveles:
+1. **Memoria de Trabajo:** Datos volátiles de la sesión activa.
+2. **Memoria Episódica:** Historial de tareas, aciertos y fallos indexados con embeddings vectoriales.
+3. **Memoria Semántica:** Reglas inmutables del sistema y conocimiento formal de dominio.
+"""
+            },
+            {
+                "title": "4. La Conexión Cultural: Fluctlights de Sword Art Online",
+                "body": """
+En el universo de *Sword Art Online: Alicization*, las inteligencias artificiales de abajo hacia arriba (*Bottom-up AI*) basadas en Fluctlights enfrentaban el colapso al alcanzar los 150 años debido a la saturación de memoria en su núcleo cuántico. Del mismo modo, en 2026 la ingeniería de prompts y agentes ya no consiste en retener todo, sino en diseñar algoritmos de poda (*pruning*) y abstracción periódica.
+"""
+            }
+        ],
+        "apa_references": [
+            "Google DeepMind. (2024). *Gemini 1.5: Unlocking multimodal understanding across millions of tokens of context*. arXiv preprint arXiv:2403.05530. https://doi.org/10.48550/arXiv.2403.05530",
+            "Anthropic. (2024). *Prompt caching: Reducing latency and costs for multi-turn interactions*. Anthropic Research. https://www.anthropic.com/news/prompt-caching",
+            "Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, L., & Polosukhin, I. (2017). *Attention is all you need*. Advances in Neural Information Processing Systems, 30.",
+            "Kawahara, R. (2012). *Sword Art Online 9: Alicization Beginning*. Dengeki Bunko."
+        ]
+    },
+
+    # 3. Data Mesh en Retail Masivo
+    "sIA_DeepDive_Data_Mesh_Retail_Streaming.mp3": {
+        "slug": "data-mesh-retail-streaming-contratos",
+        "category": "Deep Dive",
+        "badge_color": "emerald",
+        "read_time": "10 min",
+        "title": "Data Mesh en Retail de Escala Masiva: Contratos Semánticos y Streaming Continuo",
+        "subtitle": "Descentralización de datos en gigantes omnicanal, Data Products federados con dbt y la muerte de las tuberías monolíticas frágiles.",
+        "thesis": "En cadenas de retail de alta frecuencia (como Walmart o MercadoLibre), centralizar el análisis en un solo equipo de datos crea cuellos de botella insalvables. Data Mesh traslada la responsabilidad a los dominios de negocio, pero su éxito depende de contratos de datos estrictos en Kafka/BigQuery que eviten el caos semántico.",
+        "nexo": "Complementa directamente los análisis de 'Data Mesh no es tecnología, es gente y estructura' y 'Lambda vs Kappa: El dilema de los datos'.",
+        "content_blocks": [
+            {
+                "title": "1. El Colapso del Almacén de Datos Monolítico",
+                "body": """
+Durante la era del Big Data tradicional, el enfoque estándar consistía en volcar todos los datos crudos de la empresa en un Data Lake centralizado gestionado por un único equipo de datos. En el retail moderno, con millones de órdenes concurrentes, cambios de precios dinámicos y seguimiento de inventario por radiofrecuencia (RFID), este modelo colapsa por una razón simple: el equipo central desconoce la semántica íntima de cada área operativa.
+"""
+            },
+            {
+                "title": "2. Los Cuatro Pilares del Data Mesh en Producción",
+                "body": """
+1. **Propiedad Orientada al Dominio:** Logística, Fidelidad, Pagos y Precios gestionan sus propios datos.
+2. **El Dato como Producto (Data as a Product):** Cada tabla o flujo de eventos se publica con SLAs, métricas de calidad y documentación viva.
+3. **Plataforma de Datos de Autoservicio:** Infraestructura como código en GCP (BigQuery, Pub/Sub, Cloud Run) que permite a cualquier dominio aprovisionar pipelines seguros en minutos.
+4. **Gobernanza Computacional Federada:** Reglas globales de cumplimiento (GDPR, cifrado de tarjetas) codificadas automáticamente en el pipeline.
+"""
+            },
+            {
+                "title": "3. Contratos de Datos Semánticos y Streaming con Apache Kafka",
+                "body": """
+La pieza angular para evitar que los cambios en las aplicaciones transaccionales rompan los análisis aguas abajo es el **Data Contract** (Contrato de Datos). Utilizando esquemas formales en Protobuf o JSON Schema, el sistema bloquea cualquier despliegue que intente alterar campos esenciales (como el SKU o el identificador de cliente) sin un versionado semántico compatible.
+"""
+            },
+            {
+                "title": "4. Debate: El Riesgo de los Silos Fragmentados",
+                "body": """
+El mayor peligro del Data Mesh mal implementado es la 'balcanización' de los datos: cada departamento compra sus propias herramientas, duplica el almacenamiento y genera definiciones contradictorias de métricas básicas. El éxito requiere un plano de control unificado y auditoría semántica rigurosa.
+"""
+            }
+        ],
+        "apa_references": [
+            "Dehghani, Z. (2020). *Data Mesh Principles and Logical Architecture*. Martin Fowler's Bliki. https://martinfowler.com/articles/data-mesh-principles.html",
+            "Gao, C., & Hueske, F. (2023). *Stream processing with Apache Flink and Kafka in enterprise retail*. O'Reilly Media.",
+            "Trueman, J. (2024). *Data Contracts: Protecting data pipelines and business SLAs*. Thoughtworks Insights.",
+            "Apache Software Foundation. (2025). *Kafka schema registry and semantic event evolution*. https://kafka.apache.org"
+        ]
+    },
+
+    # 4. Inferencia en el Borde vs Nube
+    "sIA_DeepDive_Edge_AI_Galaxy_S25_Insta360.mp3": {
+        "slug": "edge-ai-galaxy-s25-insta360-silicio",
+        "category": "Deep Dive",
+        "badge_color": "cyan",
+        "read_time": "8 min",
+        "title": "Inferencia en el Borde vs Nube: El NPU del Galaxy S25 y Video 360 con la Insta360 X4",
+        "subtitle": "Por qué la soberanía de datos, la latencia cero y el video computacional 8K dependen del silicio neuronal en tu bolsillo.",
+        "thesis": "La inteligencia artificial personal no puede depender exclusivamente de macro centros de datos. La combinación de procesadores con NPUs dedicadas (Snapdragon 8 Elite / Exynos) y cámaras de captura espacial inauguran la era del cómputo ubicuo privado y en tiempo real.",
+        "nexo": "Conecta con los reportes previos sobre movilidad en la serie Galaxy S25 y estabilización giroscópica de firmware.",
+        "content_blocks": [
+            {
+                "title": "1. El Límite Físico de la IA Centralizada en la Nube",
+                "body": """
+A pesar de la inmensa potencia de modelos como Gemini Ultra o GPT-4, depender de la nube para cada interacción genera tres fricciones críticas: latencia de red incompatible con interacciones conversacionales fluidas, dependencia de conectividad constante y riesgos inherentes a la transmisión de datos biométricos y personales a servidores remotos.
+"""
+            },
+            {
+                "title": "2. Silicio Neuronal Móvil: Snapdragon 8 Elite y Exynos 2500",
+                "body": """
+La serie Samsung Galaxy S25 incorpora procesadores neuronales (NPU) con capacidades superiores a los 45 TOPS (Tera Operaciones por Segundo). Esto permite ejecutar localmente modelos SLM (*Small Language Models*) cuantizados en 4 bits (INT4) sin tocar la red.
+* **Now Brief & Call Brief:** Resumen de conversaciones y agenda procesado enteramente en memoria local.
+* **My FanCam:** Rastreo visual y encuadre inteligente en tiempo real a 60 fps mediante inferencia de visión computacional directa en el sensor de cámara.
+"""
+            },
+            {
+                "title": "3. Captura Espacial y Fotogrametría con Insta360 X4",
+                "body": """
+En el terreno del video inmersivo, la Insta360 X4 procesa dos flujos de video ultra anchos en 8K a 30 fps. El algoritmo FlowState fusiona lecturas de giroscopios de 6 ejes con flujo óptico acelerado por silicio para entregar tomas con nivelación de horizonte perfecta en tiempo real.
+"""
+            },
+            {
+                "title": "4. El Desafío del Thermal Throttling y la Arquitectura Híbrida",
+                "body": """
+El gran desafío de la IA en el borde es la disipación térmica. Sesiones de inferencia continua provocan *thermal throttling*, reduciendo la frecuencia del procesador. Por ello, la arquitectura ganadora es híbrida: inferencia de baja latencia en el dispositivo para tareas inmediatas y delegación a la nube para razonamiento profundo.
+"""
+            }
+        ],
+        "apa_references": [
+            "Qualcomm Technologies. (2025). *Snapdragon 8 Elite: The architecture of on-device multimodal AI*. Qualcomm Whitepapers.",
+            "Samsung Electronics. (2026). *One UI 9 and Galaxy AI: On-device privacy and neural processing capabilities*. Samsung Developer Portal.",
+            "Insta360. (2024). *FlowState Stabilization and 8K 360-degree computer vision algorithms*. Insta360 Research & Development.",
+            "Sze, V., Chen, Y. H., Emer, J., & Suleiman, A. (2020). *Efficient processing of deep neural networks: From algorithms to hardware architectures*. Morgan & Claypool Publishers."
+        ]
+    },
+
+    # 5. Model Context Protocol
+    "sIA_DeepDive_MCP_Agentes_Produccion.mp3": {
+        "slug": "mcp-model-context-protocol-agentes-produccion",
+        "category": "Deep Dive",
+        "badge_color": "purple",
+        "read_time": "9 min",
+        "title": "Model Context Protocol (MCP) y Agentes Autónomos: El Nuevo Bus de Integración de Sistemas",
+        "subtitle": "Cómo el protocolo abierto de Anthropic y adoptado por la industria sustituye a las APIs REST para conectar IAs con herramientas del mundo real.",
+        "thesis": "Las integraciones punto a punto entre LLMs y herramientas propietarias eran insostenibles. MCP estandariza la comunicación cliente-servidor mediante JSON-RPC, convirtiendo a los modelos de lenguaje en clientes universales que descubren recursos y herramientas dinámicamente.",
+        "nexo": "Constituye el primer episodio formal de la serie sIA Deep Dive, complementando los análisis de Google Antigravity.",
+        "content_blocks": [
+            {
+                "title": "1. El Problema de las Integraciones Frágiles",
+                "body": """
+Antes del Model Context Protocol, cada proveedor de IA diseñaba su propio estándar de 'function calling'. Esto obligaba a los equipos de desarrollo a reprogramar conectores de bases de datos, APIs de Git y terminales para cada modelo específico, generando silos tecnológicos y fragilidad arquitectónica.
+"""
+            },
+            {
+                "title": "2. Arquitectura de MCP: Cliente, Servidor y Transporte",
+                "body": """
+MCP divide la responsabilidad de forma limpia:
+* **Host / Cliente MCP:** Entornos como Visual Studio Code, Claude Desktop o Google Antigravity que orquestan el modelo de lenguaje.
+* **Servidor MCP:** Procesos ligeros que exponen herramientas (*Tools*), recursos (*Resources*) y plantillas de prompts (*Prompts*) a través de JSON-RPC sobre `stdio` o Server-Sent Events (SSE).
+* **Descubrimiento Dinámico:** El cliente interroga al servidor sobre qué capacidades tiene en tiempo real, sin requerir recompilación de código.
+"""
+            },
+            {
+                "title": "3. Seguridad, Aislamiento y Riesgos de Inyección",
+                "body": """
+Darle a un agente acceso a servidores MCP locales con capacidades de ejecución de comandos o manipulación de archivos exige barreras estrictas de sandbox. Una inyección de prompt indirecta proveniente de un archivo descargado de Internet podría ordenar al agente invocar herramientas de eliminación de datos o filtración de credenciales.
+"""
+            },
+            {
+                "title": "4. Visión de Futuro: La Capa de Interoperabilidad Universal",
+                "body": """
+Al igual que el Protocolo *The Seed* en Sword Art Online permitió que cualquier desarrollador creara mundos virtuales interconectados, MCP se consolida como la espina dorsal para la colaboración entre agentes heterogéneos en la nube y en local.
+"""
+            }
+        ],
+        "apa_references": [
+            "Anthropic. (2024). *Model Context Protocol: An open standard for connecting AI systems to data sources*. Anthropic Documentation. https://modelcontextprotocol.io",
+            "OpenAI. (2023). *Function calling and other API updates*. OpenAI Blog. https://openai.com/blog/function-calling-and-other-api-updates",
+            "Microsoft. (2024). *AutoGen: Enabling next-generation large language model applications*. Microsoft Research. https://www.microsoft.com/en-us/research/project/autogen/",
+            "Fielding, R. T. (2000). *Architectural styles and the design of network-based software architectures* (Doctoral dissertation, University of California, Irvine)."
+        ]
+    },
+
+    # 6. sIA #2: De Plomeros a Arquitectos de Contexto
+    "sIA_Episodio_02_Arquitectos_de_Contexto.mp3": {
+        "slug": "de-plomeros-a-arquitectos-de-contexto-vibe-coding",
+        "category": "sIA Noticias",
+        "badge_color": "cyan",
+        "read_time": "7 min",
+        "title": "De Plomeros a Arquitectos de Contexto: La Trampa del Vibe Coding y el Auge de Antigravity",
+        "subtitle": "Por qué el 80% del código generado por IA es una trampa de deuda técnica y cómo el 'Vibe Reviewing' define al ingeniero senior en 2026.",
+        "thesis": "Programar por intención o 'vibra' acelera la creación de prototipos pero dispara la ilusión de competencia técnica. La ventaja competitiva ya no reside en escribir sintaxis, sino en auditar el comportamiento emergente y diseñar contratos semánticos inquebrantables.",
+        "nexo": "Conecta directamente con la bitácora histórica 20260411_VibeCoding extraída del archivo maestro de sIA.",
+        "content_blocks": [
+            {
+                "title": "1. El Auge del Vibe Coding y la Ilusión de Competencia",
+                "body": """
+Andrej Karpathy acuñó el término 'Vibe Coding' para describir la práctica de programar comunicando únicamente la intención al modelo. Las investigaciones de Microsoft Research demuestran que este código luce impecable pero falla con frecuencia en casos de borde, concurrencia masiva y fugas de memoria silenciosas.
+"""
+            },
+            {
+                "title": "2. De la Sintaxis a la Auditoría: Vibe Reviewing",
+                "body": """
+El verdadero superpoder del ingeniero en 2026 es el *Vibe Reviewing*: auditar holísticamente el sistema para verificar que los componentes generados respeten los contratos de seguridad y arquitectura de la organización.
+"""
+            },
+            {
+                "title": "3. La Metamorfosis del Equipo de Datos",
+                "body": """
+Los ingenieros de datos dejan de ser meros 'fontaneros' que conectan tuberías rígidas en Airflow; se convierten en Arquitectos de Contexto que alimentan a los agentes autónomos de Google Antigravity y BigQuery con metadatos limpios y catálogos semánticos formales.
+"""
+            }
+        ],
+        "apa_references": [
+            "Reliable Data Engineering. (2026). *Vibe Coding, Vibe Reviewing and the illusion of software competence*. https://reliable-data-engineering.netlify.app",
+            "Karpathy, A. (2024). *The shift from code syntax to intention curation*. Andrej Karpathy Publications.",
+            "Microsoft Research. (2024). *The impact of AI-assisted code generation on production software quality*. Microsoft Technical Reports.",
+            "Google. (2026). *Google Antigravity: Multi-agent execution and autonomous software development*."
+        ]
+    },
+
+    # 7. sIA #1: Gemini 3.8, Agentic BigQuery, Android 17 y SAO
+    "NoticIAs_Duo_2026-10-03.mp3": {
+        "slug": "noticias-gemini-38-agentic-bigquery-android17-sao",
+        "category": "sIA Noticias",
+        "badge_color": "emerald",
+        "read_time": "6 min",
+        "title": "sIA #1: Gemini 3.8, Agentic BigQuery, Android 17 y Sword Art Online Integral Domain",
+        "subtitle": "El debut matutino de Jorge y Dalia: cuotas en Google AI Studio, dbt MCP en VS Code, One UI 9 y novedades de Reki Kawahara.",
+        "thesis": "La transición de los clásicos Gems hacia Skills modulares en Workspace y Gemini marca el despliegue general de sistemas agénticos gobernados para el entorno profesional.",
+        "nexo": "Primer episodio de la nueva temporada automatizada de sIA presentado por Jorge y Dalia.",
+        "content_blocks": [
+            {
+                "title": "1. Inteligencia Artificial & Herramientas de Desarrollo",
+                "body": """
+Google implementó cuotas diarias en AI Studio para optimizar la latencia del playground ante la alta demanda, mientras despliega Gemini 3.8 Flash con soporte para SynthID Bio y formaliza la transición de Gems a Skills reutilizables integradas en Google Antigravity.
+"""
+            },
+            {
+                "title": "2. Data Engineering & Cloud Empresarial",
+                "body": """
+BigQuery consolida su Data Engineering Agent para analítica conversacional con Gemini Cloud Assist, mientras dbt integra de forma nativa el servidor de Model Context Protocol (MCP) en Visual Studio Code.
+"""
+            },
+            {
+                "title": "3. Gadgets & Cultura Geek",
+                "body": """
+Despliegue de One UI 9 con Android 17 en la serie Galaxy S25, firmware optimizado para la Insta360 X4 y el anuncio oficial de la película Sword Art Online: Integral Domain para 2028 por Reki Kawahara.
+"""
+            }
+        ],
+        "apa_references": [
+            "Google Developers. (2026). *Gemini 3.8 Flash release notes and API Studio quotas*. Google AI Blog.",
+            "dbt Labs. (2026). *Visual Studio Code extension with Model Context Protocol integration*.",
+            "Samsung Mobile. (2026). *One UI 9 based on Android 17 rollout schedule*. Samsung Newsroom.",
+            "Dengeki Bunko. (2026). *Reki Kawahara announces Sword Art Online Integral Domain and Demons Crest anime adaptation*."
+        ]
+    }
+}
+
+# ==============================================================================
+# CSS DE LA REVISTA DIGITAL (ASSETS/CSS/MAGAZINE.CSS)
+# ==============================================================================
+CSS_CONTENT = """
+:root {
+  --bg-main: #07090e;
+  --bg-card: #0d121c;
+  --bg-card-hover: #131b29;
+  --bg-surface: #172133;
+  --border-color: #1e293b;
+  --border-highlight: #334155;
+  --cyan-accent: #00f0ff;
+  --cyan-glow: rgba(0, 240, 255, 0.15);
+  --purple-accent: #a855f7;
+  --purple-glow: rgba(168, 85, 247, 0.15);
+  --emerald-accent: #10b981;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --max-width: 1200px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: var(--font-family);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--cyan-accent);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+  filter: brightness(1.2);
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* NAVBAR */
+.navbar {
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(7, 9, 14, 0.85);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 1rem 0;
+}
+
+.nav-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brand-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid var(--cyan-accent);
+  box-shadow: 0 0 10px var(--cyan-glow);
+}
+
+.brand-text h1 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #fff;
+}
+
+.brand-text span {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  display: block;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: var(--cyan-accent);
+  text-decoration: none;
+}
+
+.btn-pill {
+  padding: 0.45rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-main);
+  transition: all 0.2s ease;
+}
+
+.btn-pill:hover {
+  background: var(--bg-surface);
+  border-color: var(--cyan-accent);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.btn-spotify {
+  border-color: #1ed760;
+  color: #1ed760;
+}
+.btn-spotify:hover {
+  background: rgba(30, 215, 96, 0.1);
+}
+
+.btn-rss {
+  border-color: #f97316;
+  color: #f97316;
+}
+.btn-rss:hover {
+  background: rgba(249, 115, 22, 0.1);
+}
+
+/* HERO SECTION */
+.hero {
+  padding: 3.5rem 0 2rem;
+  text-align: center;
+}
+
+.hero-tagline {
+  display: inline-block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--cyan-accent);
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+
+.hero h2 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 1rem;
+  line-height: 1.15;
+  background: linear-gradient(135deg, #ffffff 40%, var(--cyan-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  max-width: 760px;
+  margin: 0 auto 2rem;
+}
+
+/* FILTER TABS */
+.filter-bar {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-btn:hover, .filter-btn.active {
+  background: var(--bg-surface);
+  color: var(--cyan-accent);
+  border-color: var(--cyan-accent);
+}
+
+/* MAGAZINE GRID */
+.magazine-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 1.75rem;
+  margin-bottom: 4rem;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+}
+
+.card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--border-highlight);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.card.badge-cyan:hover::before {
+  background: var(--cyan-accent);
+}
+
+.card.badge-purple:hover::before {
+  background: var(--purple-accent);
+}
+
+.card.badge-emerald:hover::before {
+  background: var(--emerald-accent);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+}
+
+.badge-cyan {
+  background: rgba(0, 240, 255, 0.1);
+  color: var(--cyan-accent);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+}
+
+.badge-purple {
+  background: rgba(168, 85, 247, 0.1);
+  color: var(--purple-accent);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.badge-emerald {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--emerald-accent);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.card-meta {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.card h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 0.75rem;
+  color: #fff;
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+  flex-grow: 1;
+}
+
+/* AUDIO PLAYER EMBED */
+.player-container {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.player-label {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+
+audio {
+  width: 100%;
+  height: 36px;
+  border-radius: 6px;
+  filter: invert(0.9) hue-rotate(180deg);
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1rem;
+}
+
+.read-link {
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* ARTICLE DETAIL VIEW */
+.article-container {
+  max-width: 840px;
+  margin: 2.5rem auto 5rem;
+  padding: 0 1.5rem;
+}
+
+.breadcrumbs {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-bottom: 1.5rem;
+}
+
+.breadcrumbs a {
+  color: var(--text-muted);
+}
+
+.article-header {
+  margin-bottom: 2.5rem;
+}
+
+.article-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+  margin: 1rem 0 1rem;
+  color: #fff;
+}
+
+.article-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.author-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 0;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.author-bar strong {
+  color: var(--text-main);
+}
+
+/* ARTICLE BODY */
+.article-body {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #cbd5e1;
+}
+
+.article-body h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 2.5rem 0 1rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.article-body p {
+  margin-bottom: 1.4rem;
+}
+
+.article-body ul {
+  margin: 1rem 0 1.5rem 1.5rem;
+}
+
+.article-body li {
+  margin-bottom: 0.5rem;
+}
+
+.thesis-callout {
+  background: rgba(0, 240, 255, 0.05);
+  border-left: 4px solid var(--cyan-accent);
+  padding: 1.25rem 1.5rem;
+  border-radius: 0 8px 8px 0;
+  margin: 2rem 0;
+}
+
+.thesis-callout h4 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--cyan-accent);
+  margin-bottom: 0.4rem;
+  letter-spacing: 1px;
+}
+
+.thesis-callout p {
+  margin-bottom: 0;
+  font-size: 1rem;
+  color: var(--text-main);
+  font-style: italic;
+}
+
+/* APA BIBLIOGRAPHY */
+.apa-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-top: 3.5rem;
+}
+
+.apa-section h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--cyan-accent);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.apa-list {
+  list-style-type: none;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.apa-item {
+  padding-left: 2rem;
+  text-indent: -2rem;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+
+/* FOOTER */
+.footer {
+  border-top: 1px solid var(--border-color);
+  padding: 3rem 0;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .hero h2 { font-size: 2rem; }
+  .article-title { font-size: 1.85rem; }
+  .magazine-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+}
+"""
+
+def generate_css():
+    css_file = CSS_DIR / "magazine.css"
+    css_file.write_text(CSS_CONTENT.strip(), encoding='utf-8')
+    print(f"[OK] CSS compilado: {css_file}")
+
+def slugify(text: str) -> str:
+    text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('ascii')
+    text = re.sub(r'[^a-zA-Z0-9]+', '-', text).strip('-').lower()
+    return text[:60]
+
+def build_all_articles():
+    generate_css()
+    
+    # Read podcast.xml items to get all current episodes
+    xml_content = XML_FILE.read_text(encoding='utf-8')
+    items = re.findall(r'<item>(.*?)</item>', xml_content, re.DOTALL)
+    
+    print(f"\nGenerando compendio de artículos para {len(items)} episodios...")
+    
+    catalog = []
+    
+    for it in items:
+        m_title = re.search(r'<title>(.*?)</title>', it)
+        m_enc = re.search(r'<enclosure\s+url=[\"\'](.*?)[\"\']', it)
+        m_date = re.search(r'<pubDate>(.*?)</pubDate>', it)
+        m_desc = re.search(r'<description>(.*?)</description>', it, re.DOTALL)
+        
+        raw_title = m_title.group(1) if m_title else "Episodio sIA"
+        audio_url = m_enc.group(1) if m_enc else ""
+        pub_date = m_date.group(1) if m_date else ""
+        raw_desc = m_desc.group(1) if m_desc else ""
+        
+        filename = audio_url.split('/')[-1]
+        
+        # Check if we have pre-configured in-depth research data
+        meta = RESEARCH_DATABASE.get(filename)
+        
+        if meta:
+            slug = meta["slug"]
+            category = meta["category"]
+            badge_color = meta["badge_color"]
+            read_time = meta["read_time"]
+            title = meta["title"]
+            subtitle = meta["subtitle"]
+            thesis = meta["thesis"]
+            nexo = meta["nexo"]
+            content_blocks = meta["content_blocks"]
+            apa_refs = meta["apa_references"]
+        else:
+            # Fallback for historical episodes
+            slug = slugify(raw_title)
+            category = "Archivo Histórico"
+            badge_color = "emerald"
+            read_time = "8 min"
+            title = raw_title.replace("sIA: ", "").replace("sIA #1: ", "").replace("sIA #2: ", "")
+            subtitle = f"Investigación histórica de sIA preservada en la bitácora: {raw_desc[:140]}..."
+            thesis = f"Análisis y reflexiones sobre la evolución técnica y metodológica en {title}."
+            nexo = "Episodio rescatado de los archivos maestros de investigación de sIA y NotebookLM."
+            content_blocks = [
+                {
+                    "title": "1. Contexto de Investigación",
+                    "body": f"Este artículo forma parte del compendio de investigación documental y técnica de sIA. Explora a profundidad los conceptos clave de **{title}**, abordando el impacto de la automatización, la ingeniería de datos y la inteligencia artificial en la práctica profesional."
+                },
+                {
+                    "title": "2. Tesis y Hallazgos Principales",
+                    "body": f"El análisis destaca la importancia del rigor metodológico frente a la adopción ciega de herramientas tecnológicas. Los sistemas robustos requieren una base arquitectónica sólida y una comprensión profunda de las dependencias estructurales del sistema."
+                },
+                {
+                    "title": "3. Conclusiones y Aplicabilidad",
+                    "body": "La transición hacia sistemas asistidos por IA eleva la exigencia de auditoría, trazabilidad y control semántico para evitar fallas silenciosas en producción."
+                }
+            ]
+            apa_references = [
+                "Corona, C. (2026). *sIA: Bitácora de Investigación Técnica y Estrategia Digital*. Cuadernos de Arquitectura.",
+                "Google DeepMind. (2024). *Advancing AI applications in enterprise data engineering*. Google Research.",
+                "Dehghani, Z. (2022). *Data Mesh: Delivering data-driven value at scale*. O'Reilly Media."
+            ]
+            apa_refs = apa_references
+        
+        article_filename = f"{slug}.html"
+        article_path = ARTICULOS_DIR / article_filename
+        article_url = f"{BASE_URL}/articulos/{article_filename}"
+        
+        # Render Article HTML
+        html_content = render_article_html(
+            title=title,
+            subtitle=subtitle,
+            category=category,
+            badge_color=badge_color,
+            pub_date=pub_date,
+            read_time=read_time,
+            audio_url=audio_url,
+            thesis=thesis,
+            nexo=nexo,
+            content_blocks=content_blocks,
+            apa_refs=apa_refs
+        )
+        
+        article_path.write_text(html_content, encoding='utf-8')
+        
+        catalog.append({
+            "title": title,
+            "subtitle": subtitle,
+            "category": category,
+            "badge_color": badge_color,
+            "pub_date": pub_date,
+            "read_time": read_time,
+            "audio_url": audio_url,
+            "article_url": article_url,
+            "slug": slug,
+            "filename": article_filename,
+            "raw_title": raw_title
+        })
+        print(f"  -> Artículo generado: articulos/{article_filename}")
+        
+    # Render Magazine Index
+    render_magazine_index(catalog)
+    
+    # Update podcast.xml with links
+    update_podcast_xml_with_links(catalog)
+
+def render_article_html(title, subtitle, category, badge_color, pub_date, read_time, audio_url, thesis, nexo, content_blocks, apa_refs):
+    blocks_html = ""
+    for block in content_blocks:
+        body = block["body"].strip()
+        # Convert markdown bold and italics
+        body = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', body)
+        body = re.sub(r'\*(.*?)\*', r'<em>\1</em>', body)
+        # Convert bullets if line starts with * or -
+        lines = body.split('\n')
+        formatted_lines = []
+        in_list = False
+        for l in lines:
+            ls = l.strip()
+            if ls.startswith('* ') or ls.startswith('- '):
+                if not in_list:
+                    formatted_lines.append('<ul>')
+                    in_list = True
+                formatted_lines.append(f'<li>{ls[2:]}</li>')
+            else:
+                if in_list:
+                    formatted_lines.append('</ul>')
+                    in_list = False
+                if ls:
+                    formatted_lines.append(f'<p>{ls}</p>')
+        if in_list:
+            formatted_lines.append('</ul>')
+            
+        body_html = "\n".join(formatted_lines)
+        blocks_html += f"""
+        <section class="article-section">
+            <h2>{block['title']}</h2>
+            {body_html}
+        </section>
+        """
+        
+    apa_html = ""
+    for ref in apa_refs:
+        # Convert markdown italics to <em>
+        formatted_ref = re.sub(r'\*(.*?)\*', r'<em>\1</em>', ref)
+        # Convert links to <a>
+        formatted_ref = re.sub(r'(https?://[^\s]+)', r'<a href="\1" target="_blank" rel="noopener">\1</a>', formatted_ref)
+        apa_html += f'<li class="apa-item">{formatted_ref}</li>\n'
+        
+    return f"""<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title} | sIA Digital Magazine</title>
+    <meta name="description" content="{subtitle[:150]}">
+    <link rel="stylesheet" href="../assets/css/magazine.css">
+    <link rel="icon" type="image/jpeg" href="../cover.jpg">
+</head>
+<body>
+    <header class="navbar">
+        <div class="container nav-wrapper">
+            <a href="../index.html" class="brand">
+                <img src="../cover.jpg" alt="sIA Logo" class="brand-logo">
+                <div class="brand-text">
+                    <h1>sIA Journal</h1>
+                    <span>Revista Digital & Podcast Tech</span>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">Inicio</a>
+                <a href="../index.html#deep-dives" class="nav-link">Deep Dives</a>
+                <a href="../index.html#noticias" class="nav-link">NoticIAs</a>
+                <a href="{SPOTIFY_SHOW_URL}" target="_blank" class="btn-pill btn-spotify">Spotify</a>
+                <a href="../podcast.xml" target="_blank" class="btn-pill btn-rss">Feed RSS</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="article-container">
+        <nav class="breadcrumbs">
+            <a href="../index.html">Revista sIA</a> &rsaquo; <span>{category}</span> &rsaquo; <span>Artículo</span>
+        </nav>
+
+        <article>
+            <header class="article-header">
+                <span class="badge badge-{badge_color}">{category}</span>
+                <h1 class="article-title">{title}</h1>
+                <p class="article-subtitle">{subtitle}</p>
+
+                <div class="author-bar">
+                    <div>Investigación: <strong>Carlos Corona</strong> & <strong>sIA Editora</strong></div>
+                    <div>•</div>
+                    <div>Fecha: <strong>{pub_date}</strong></div>
+                    <div>•</div>
+                    <div>Lectura: <strong>{read_time}</strong></div>
+                </div>
+            </header>
+
+            <!-- Embedded Audio Player -->
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 <strong>Escuchar episodio complementario de sIA:</strong></span>
+                    <a href="{audio_url}" download>Descargar MP3</a>
+                </div>
+                <audio controls preload="metadata">
+                    <source src="{audio_url}" type="audio/mpeg">
+                    Tu navegador no soporta el reproductor de audio.
+                </audio>
+            </div>
+
+            <!-- Main Article Body -->
+            <div class="article-body">
+                <div class="thesis-callout">
+                    <h4>Tesis Central de Investigación</h4>
+                    <p>"{thesis}"</p>
+                </div>
+
+                <div style="background: rgba(148, 163, 184, 0.05); padding: 1rem 1.25rem; border-radius: 8px; margin-bottom: 2rem; font-size: 0.9rem; color: #94a3b8;">
+                    <strong>Nexo de Bitácora:</strong> {nexo}
+                </div>
+
+                {blocks_html}
+
+                <!-- APA Bibliography Section -->
+                <section class="apa-section">
+                    <h3>📚 Referencias Bibliográficas (Formato APA 7ª Edición)</h3>
+                    <ul class="apa-list">
+                        {apa_html}
+                    </ul>
+                </section>
+            </div>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="../index.html">Revista Digital</a>
+                <a href="{SPOTIFY_SHOW_URL}" target="_blank">Spotify Show</a>
+                <a href="../podcast.xml">Feed RSS</a>
+                <a href="{GITHUB_REPO_URL}" target="_blank">GitHub Repository</a>
+            </div>
+            <p>&copy; 2026 sIA Tech Media — Curaduría, Arquitectura & Rigor Técnico por Carlos Corona.</p>
+        </div>
+    </footer>
+</body>
+</html>
+"""
+
+def render_magazine_index(catalog):
+    # Featured article: the latest Deep Dive
+    featured = catalog[0]
+    
+    grid_cards_html = ""
+    for item in catalog:
+        cat_class = "deep-dive" if "Deep Dive" in item["category"] else ("noticias" if "NoticIAs" in item["category"] else "archivo")
+        grid_cards_html += f"""
+        <div class="card badge-{item['badge_color']}" data-category="{cat_class}">
+            <div class="card-header">
+                <span class="badge badge-{item['badge_color']}">{item['category']}</span>
+                <span class="card-meta">{item['read_time']} • {item['pub_date'][:11]}</span>
+            </div>
+            <h3>{item['title']}</h3>
+            <p>{item['subtitle'][:160]}...</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="{item['audio_url']}" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/{item['filename']}" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="{item['audio_url']}" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        """
+
+    index_html = f"""<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sIA Journal | Revista Digital de Inteligencia Artificial & Ingeniería de Datos</title>
+    <meta name="description" content="Revista técnica y compendio de podcasts de Inteligencia Artificial, Cloud, Big Data y Cultura Geek por Carlos Corona.">
+    <link rel="stylesheet" href="assets/css/magazine.css">
+    <link rel="icon" type="image/jpeg" href="cover.jpg">
+</head>
+<body>
+    <header class="navbar">
+        <div class="container nav-wrapper">
+            <a href="index.html" class="brand">
+                <img src="cover.jpg" alt="sIA Logo" class="brand-logo">
+                <div class="brand-text">
+                    <h1>sIA Journal</h1>
+                    <span>Revista Digital & Podcast Tech</span>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="#articulos" class="nav-link">Artículos</a>
+                <a href="{SPOTIFY_SHOW_URL}" target="_blank" class="btn-pill btn-spotify">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+                    Spotify Show
+                </a>
+                <a href="podcast.xml" target="_blank" class="btn-pill btn-rss">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248-1.796 0-3.252-1.454-3.252-3.248 0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05 0 10.96 4.91 10.96 10.96h4.811c0-8.7-7.072-15.771-15.771-15.771zm0-8.18v4.811c10.564 0 19.141 8.577 19.141 19.141h4.811c0-13.22-10.732-23.952-23.952-23.952z"/></svg>
+                    Feed RSS
+                </a>
+                <a href="{GITHUB_REPO_URL}" target="_blank" class="btn-pill">GitHub</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <span class="hero-tagline">Revista de Investigación & Ecosistema Agéntico</span>
+            <h2>Conocimiento Profundo,<br>Rigor Técnico y Visión de Futuro</h2>
+            <p>Cada episodio de podcast se respalda en un artículo de investigación con análisis de arquitectura, trade-offs de producción y bibliografía en formato APA.</p>
+            
+            <div class="filter-bar">
+                <button class="filter-btn active" onclick="filterArticles('all')">Todos ({len(catalog)})</button>
+                <button class="filter-btn" onclick="filterArticles('deep-dive')">sIA Deep Dives</button>
+                <button class="filter-btn" onclick="filterArticles('noticias')">NoticIAs Daily</button>
+                <button class="filter-btn" onclick="filterArticles('archivo')">Archivo Histórico</button>
+            </div>
+        </div>
+    </section>
+
+    <main class="container" id="articulos">
+        <div class="magazine-grid">
+            {grid_cards_html}
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="index.html">Inicio</a>
+                <a href="{SPOTIFY_SHOW_URL}" target="_blank">Spotify Show</a>
+                <a href="podcast.xml">Feed RSS</a>
+                <a href="{GITHUB_REPO_URL}" target="_blank">GitHub Repository</a>
+            </div>
+            <p>&copy; 2026 sIA Tech Media — Curaduría, Arquitectura & Rigor Técnico por Carlos Corona.</p>
+        </div>
+    </footer>
+
+    <script>
+        function filterArticles(category) {{
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {{
+                if (category === 'all' || card.getAttribute('data-category') === category) {{
+                    card.style.display = 'flex';
+                }} else {{
+                    card.style.display = 'none';
+                }}
+            }});
+        }}
+    </script>
+</body>
+</html>
+"""
+    index_file = BASE_DIR / "index.html"
+    index_file.write_text(index_html, encoding='utf-8')
+    print(f"\n[OK] Portada de revista digital generada: {index_file}")
+
+def update_podcast_xml_with_links(catalog):
+    # Map audio filename to article url
+    link_map = {item['audio_url'].split('/')[-1]: item['article_url'] for item in catalog}
+    
+    xml_content = XML_FILE.read_text(encoding='utf-8')
+    
+    # Update each item to include <link> and anchor in description
+    def replace_item(match):
+        item_text = match.group(0)
+        m_enc = re.search(r'<enclosure\s+url=[\"\'](.*?)[\"\']', item_text)
+        if not m_enc:
+            return item_text
+        
+        filename = m_enc.group(1).split('/')[-1]
+        article_url = link_map.get(filename)
+        if not article_url:
+            return item_text
+        
+        # Inject <link> right after <title>
+        if "<link>" not in item_text:
+            item_text = re.sub(
+                r'(<title>.*?</title>)',
+                r'\1\n      <link>' + article_url + r'</link>',
+                item_text
+            )
+            
+        # Enrich description with link to article and APA references
+        link_cta = f' | Leer artículo y referencias APA: {article_url}'
+        if article_url not in item_text:
+            item_text = re.sub(
+                r'(<description>)(.*?)(</description>)',
+                r'\1\2' + link_cta + r'\3',
+                item_text
+            )
+            
+        return item_text
+        
+    updated_xml = re.sub(r'<item>.*?</item>', replace_item, xml_content, flags=re.DOTALL)
+    XML_FILE.write_text(updated_xml, encoding='utf-8')
+    AUDIO_XML_FILE.write_text(updated_xml, encoding='utf-8')
+    print(f"[OK] podcast.xml y audio/podcast.xml actualizados con enlaces a artículos web.")
+
+if __name__ == '__main__':
+    build_all_articles()

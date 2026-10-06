@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Context Protocol (MCP) y Agentes Autónomos: El Nuevo Bus de Integración de Sistemas | sIA Digital Magazine</title>
+    <meta name="description" content="Cómo el protocolo abierto de Anthropic y adoptado por la industria sustituye a las APIs REST para conectar IAs con herramientas del mundo real.">
+    <link rel="stylesheet" href="../assets/css/magazine.css">
+    <link rel="icon" type="image/jpeg" href="../cover.jpg">
+</head>
+<body>
+    <header class="navbar">
+        <div class="container nav-wrapper">
+            <a href="../index.html" class="brand">
+                <img src="../cover.jpg" alt="sIA Logo" class="brand-logo">
+                <div class="brand-text">
+                    <h1>sIA Journal</h1>
+                    <span>Revista Digital & Podcast Tech</span>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">Inicio</a>
+                <a href="../index.html#deep-dives" class="nav-link">Deep Dives</a>
+                <a href="../index.html#noticias" class="nav-link">NoticIAs</a>
+                <a href="https://open.spotify.com/show/3oNxteAETV5wvEIPN1KDVN" target="_blank" class="btn-pill btn-spotify">Spotify</a>
+                <a href="../podcast.xml" target="_blank" class="btn-pill btn-rss">Feed RSS</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="article-container">
+        <nav class="breadcrumbs">
+            <a href="../index.html">Revista sIA</a> &rsaquo; <span>Deep Dive</span> &rsaquo; <span>Artículo</span>
+        </nav>
+
+        <article>
+            <header class="article-header">
+                <span class="badge badge-purple">Deep Dive</span>
+                <h1 class="article-title">Model Context Protocol (MCP) y Agentes Autónomos: El Nuevo Bus de Integración de Sistemas</h1>
+                <p class="article-subtitle">Cómo el protocolo abierto de Anthropic y adoptado por la industria sustituye a las APIs REST para conectar IAs con herramientas del mundo real.</p>
+
+                <div class="author-bar">
+                    <div>Investigación: <strong>Carlos Corona</strong> & <strong>sIA Editora</strong></div>
+                    <div>•</div>
+                    <div>Fecha: <strong>Sun, 04 Oct 2026 11:17:42 GMT</strong></div>
+                    <div>•</div>
+                    <div>Lectura: <strong>9 min</strong></div>
+                </div>
+            </header>
+
+            <!-- Embedded Audio Player -->
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 <strong>Escuchar episodio complementario de sIA:</strong></span>
+                    <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_MCP_Agentes_Produccion.mp3" download>Descargar MP3</a>
+                </div>
+                <audio controls preload="metadata">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_MCP_Agentes_Produccion.mp3" type="audio/mpeg">
+                    Tu navegador no soporta el reproductor de audio.
+                </audio>
+            </div>
+
+            <!-- Main Article Body -->
+            <div class="article-body">
+                <div class="thesis-callout">
+                    <h4>Tesis Central de Investigación</h4>
+                    <p>"Las integraciones punto a punto entre LLMs y herramientas propietarias eran insostenibles. MCP estandariza la comunicación cliente-servidor mediante JSON-RPC, convirtiendo a los modelos de lenguaje en clientes universales que descubren recursos y herramientas dinámicamente."</p>
+                </div>
+
+                <div style="background: rgba(148, 163, 184, 0.05); padding: 1rem 1.25rem; border-radius: 8px; margin-bottom: 2rem; font-size: 0.9rem; color: #94a3b8;">
+                    <strong>Nexo de Bitácora:</strong> Constituye el primer episodio formal de la serie sIA Deep Dive, complementando los análisis de Google Antigravity.
+                </div>
+
+                
+        <section class="article-section">
+            <h2>1. El Problema de las Integraciones Frágiles</h2>
+            <p>Antes del Model Context Protocol, cada proveedor de IA diseñaba su propio estándar de 'function calling'. Esto obligaba a los equipos de desarrollo a reprogramar conectores de bases de datos, APIs de Git y terminales para cada modelo específico, generando silos tecnológicos y fragilidad arquitectónica.</p>
+        </section>
+        
+        <section class="article-section">
+            <h2>2. Arquitectura de MCP: Cliente, Servidor y Transporte</h2>
+            <p>MCP divide la responsabilidad de forma limpia:</p>
+<ul>
+<li><strong>Host / Cliente MCP:</strong> Entornos como Visual Studio Code, Claude Desktop o Google Antigravity que orquestan el modelo de lenguaje.</li>
+</ul>
+<p><em> <strong>Servidor MCP:</strong> Procesos ligeros que exponen herramientas (</em>Tools<em>), recursos (</em>Resources<em>) y plantillas de prompts (</em>Prompts*) a través de JSON-RPC sobre `stdio` o Server-Sent Events (SSE).</p>
+<ul>
+<li><strong>Descubrimiento Dinámico:</strong> El cliente interroga al servidor sobre qué capacidades tiene en tiempo real, sin requerir recompilación de código.</li>
+</ul>
+        </section>
+        
+        <section class="article-section">
+            <h2>3. Seguridad, Aislamiento y Riesgos de Inyección</h2>
+            <p>Darle a un agente acceso a servidores MCP locales con capacidades de ejecución de comandos o manipulación de archivos exige barreras estrictas de sandbox. Una inyección de prompt indirecta proveniente de un archivo descargado de Internet podría ordenar al agente invocar herramientas de eliminación de datos o filtración de credenciales.</p>
+        </section>
+        
+        <section class="article-section">
+            <h2>4. Visión de Futuro: La Capa de Interoperabilidad Universal</h2>
+            <p>Al igual que el Protocolo <em>The Seed</em> en Sword Art Online permitió que cualquier desarrollador creara mundos virtuales interconectados, MCP se consolida como la espina dorsal para la colaboración entre agentes heterogéneos en la nube y en local.</p>
+        </section>
+        
+
+                <!-- APA Bibliography Section -->
+                <section class="apa-section">
+                    <h3>📚 Referencias Bibliográficas (Formato APA 7ª Edición)</h3>
+                    <ul class="apa-list">
+                        <li class="apa-item">Anthropic. (2024). <em>Model Context Protocol: An open standard for connecting AI systems to data sources</em>. Anthropic Documentation. <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">https://modelcontextprotocol.io</a></li>
+<li class="apa-item">OpenAI. (2023). <em>Function calling and other API updates</em>. OpenAI Blog. <a href="https://openai.com/blog/function-calling-and-other-api-updates" target="_blank" rel="noopener">https://openai.com/blog/function-calling-and-other-api-updates</a></li>
+<li class="apa-item">Microsoft. (2024). <em>AutoGen: Enabling next-generation large language model applications</em>. Microsoft Research. <a href="https://www.microsoft.com/en-us/research/project/autogen/" target="_blank" rel="noopener">https://www.microsoft.com/en-us/research/project/autogen/</a></li>
+<li class="apa-item">Fielding, R. T. (2000). <em>Architectural styles and the design of network-based software architectures</em> (Doctoral dissertation, University of California, Irvine).</li>
+
+                    </ul>
+                </section>
+            </div>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="../index.html">Revista Digital</a>
+                <a href="https://open.spotify.com/show/3oNxteAETV5wvEIPN1KDVN" target="_blank">Spotify Show</a>
+                <a href="../podcast.xml">Feed RSS</a>
+                <a href="https://github.com/CharlyCorona/noticias-podcast" target="_blank">GitHub Repository</a>
+            </div>
+            <p>&copy; 2026 sIA Tech Media — Curaduría, Arquitectura & Rigor Técnico por Carlos Corona.</p>
+        </div>
+    </footer>
+</body>
+</html>
