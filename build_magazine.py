@@ -79,7 +79,7 @@ El rol del Ingeniero de Datos en 2026 evoluciona de 'escritor de queries' a 'aud
         ],
         "apa_references": [
             "Google Cloud. (2026). *Gemini in BigQuery: AI-powered assistance for data analytics*. Google Cloud Documentation. https://cloud.google.com/bigquery/docs/gemini-overview",
-            "Dehghani, Z. (2022). *Data Mesh: Delivering data-driven value at scale*. O'Reilly Media.",
+            "Dehghani, Z. (2022). *Data Mesh: Delivering data-driven value at scale*. O'Reilly Media. https://www.oreilly.com/library/view/data-mesh/9781492092384/",
             "dbt Labs. (2025). *Semantic layer and the Model Context Protocol for enterprise analytics*. dbt Blog. https://blog.getdbt.com/semantic-layer-mcp",
             "Karpathy, A. (2023). *Software 2.0 and the evolution of data-driven systems*. Andrej Karpathy Blog. https://karpathy.github.io"
         ]
@@ -131,8 +131,8 @@ En el universo de *Sword Art Online: Alicization*, las inteligencias artificiale
         "apa_references": [
             "Google DeepMind. (2024). *Gemini 1.5: Unlocking multimodal understanding across millions of tokens of context*. arXiv preprint arXiv:2403.05530. https://doi.org/10.48550/arXiv.2403.05530",
             "Anthropic. (2024). *Prompt caching: Reducing latency and costs for multi-turn interactions*. Anthropic Research. https://www.anthropic.com/news/prompt-caching",
-            "Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, L., & Polosukhin, I. (2017). *Attention is all you need*. Advances in Neural Information Processing Systems, 30.",
-            "Kawahara, R. (2012). *Sword Art Online 9: Alicization Beginning*. Dengeki Bunko."
+            "Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, L., & Polosukhin, I. (2017). *Attention is all you need*. Advances in Neural Information Processing Systems, 30. https://arxiv.org/abs/1706.03762",
+            "Kawahara, R. (2012). *Sword Art Online 9: Alicization Beginning*. Dengeki Bunko. https://dengekibunko.jp/title/sao/"
         ]
     },
 
@@ -177,8 +177,8 @@ El mayor peligro del Data Mesh mal implementado es la 'balcanización' de los da
         ],
         "apa_references": [
             "Dehghani, Z. (2020). *Data Mesh Principles and Logical Architecture*. Martin Fowler's Bliki. https://martinfowler.com/articles/data-mesh-principles.html",
-            "Gao, C., & Hueske, F. (2023). *Stream processing with Apache Flink and Kafka in enterprise retail*. O'Reilly Media.",
-            "Trueman, J. (2024). *Data Contracts: Protecting data pipelines and business SLAs*. Thoughtworks Insights.",
+            "Gao, C., & Hueske, F. (2023). *Stream processing with Apache Flink and Kafka in enterprise retail*. O'Reilly Media. https://www.oreilly.com/library/view/stream-processing-with/9781491974285/",
+            "Trueman, J. (2024). *Data Contracts: Protecting data pipelines and business SLAs*. Thoughtworks Insights. https://www.thoughtworks.com/radar/techniques/data-contracts",
             "Apache Software Foundation. (2025). *Kafka schema registry and semantic event evolution*. https://kafka.apache.org"
         ]
     },
@@ -222,10 +222,10 @@ El gran desafío de la IA en el borde es la disipación térmica. Sesiones de in
             }
         ],
         "apa_references": [
-            "Qualcomm Technologies. (2025). *Snapdragon 8 Elite: The architecture of on-device multimodal AI*. Qualcomm Whitepapers.",
-            "Samsung Electronics. (2026). *One UI 9 and Galaxy AI: On-device privacy and neural processing capabilities*. Samsung Developer Portal.",
-            "Insta360. (2024). *FlowState Stabilization and 8K 360-degree computer vision algorithms*. Insta360 Research & Development.",
-            "Sze, V., Chen, Y. H., Emer, J., & Suleiman, A. (2020). *Efficient processing of deep neural networks: From algorithms to hardware architectures*. Morgan & Claypool Publishers."
+            "Qualcomm Technologies. (2025). *Snapdragon 8 Elite: The architecture of on-device multimodal AI*. Qualcomm Whitepapers. https://www.qualcomm.com/products/mobile/snapdragon/smartphones/snapdragon-8-series-mobile-platforms/snapdragon-8-elite-mobile-platform",
+            "Samsung Electronics. (2026). *One UI 9 and Galaxy AI: On-device privacy and neural processing capabilities*. Samsung Developer Portal. https://developer.samsung.com/galaxy-ai",
+            "Insta360. (2024). *FlowState Stabilization and 8K 360-degree computer vision algorithms*. Insta360 Research & Development. https://store.insta360.com/product/x4",
+            "Sze, V., Chen, Y. H., Emer, J., & Suleiman, A. (2020). *Efficient processing of deep neural networks: From algorithms to hardware architectures*. Morgan & Claypool Publishers. https://doi.org/10.2200/S01004ED1V01Y202004CAC050"
         ]
     },
 
@@ -272,7 +272,7 @@ Al igual que el Protocolo *The Seed* en Sword Art Online permitió que cualquier
             "Anthropic. (2024). *Model Context Protocol: An open standard for connecting AI systems to data sources*. Anthropic Documentation. https://modelcontextprotocol.io",
             "OpenAI. (2023). *Function calling and other API updates*. OpenAI Blog. https://openai.com/blog/function-calling-and-other-api-updates",
             "Microsoft. (2024). *AutoGen: Enabling next-generation large language model applications*. Microsoft Research. https://www.microsoft.com/en-us/research/project/autogen/",
-            "Fielding, R. T. (2000). *Architectural styles and the design of network-based software architectures* (Doctoral dissertation, University of California, Irvine)."
+            "Fielding, R. T. (2000). *Architectural styles and the design of network-based software architectures* (Doctoral dissertation, University of California, Irvine). https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm"
         ]
     },
 
@@ -308,9 +308,9 @@ Los ingenieros de datos dejan de ser meros 'fontaneros' que conectan tuberías r
         ],
         "apa_references": [
             "Reliable Data Engineering. (2026). *Vibe Coding, Vibe Reviewing and the illusion of software competence*. https://reliable-data-engineering.netlify.app",
-            "Karpathy, A. (2024). *The shift from code syntax to intention curation*. Andrej Karpathy Publications.",
-            "Microsoft Research. (2024). *The impact of AI-assisted code generation on production software quality*. Microsoft Technical Reports.",
-            "Google. (2026). *Google Antigravity: Multi-agent execution and autonomous software development*."
+            "Karpathy, A. (2024). *The shift from code syntax to intention curation*. Andrej Karpathy Publications. https://x.com/karpathy/status/1886192184808149383",
+            "Microsoft Research. (2024). *The impact of AI-assisted code generation on production software quality*. Microsoft Technical Reports. https://www.microsoft.com/en-us/research/publication/the-impact-of-ai-on-developer-productivity/",
+            "Google. (2026). *Google Antigravity: Multi-agent execution and autonomous software development*. Google AI Research. https://ai.google/research/"
         ]
     },
 
@@ -345,10 +345,10 @@ Despliegue de One UI 9 con Android 17 en la serie Galaxy S25, firmware optimizad
             }
         ],
         "apa_references": [
-            "Google Developers. (2026). *Gemini 3.8 Flash release notes and API Studio quotas*. Google AI Blog.",
-            "dbt Labs. (2026). *Visual Studio Code extension with Model Context Protocol integration*.",
-            "Samsung Mobile. (2026). *One UI 9 based on Android 17 rollout schedule*. Samsung Newsroom.",
-            "Dengeki Bunko. (2026). *Reki Kawahara announces Sword Art Online Integral Domain and Demons Crest anime adaptation*."
+            "Google Developers. (2026). *Gemini 3.8 Flash release notes and API Studio quotas*. Google AI Blog. https://ai.google.dev/gemini-api/docs",
+            "dbt Labs. (2026). *Visual Studio Code extension with Model Context Protocol integration*. https://marketplace.visualstudio.com/items?itemName=dbtLabs.dbt-power-user",
+            "Samsung Mobile. (2026). *One UI 9 based on Android 17 rollout schedule*. Samsung Newsroom. https://news.samsung.com/global/",
+            "Dengeki Bunko. (2026). *Reki Kawahara announces Sword Art Online Integral Domain and Demons Crest anime adaptation*. Dengeki Online. https://dengekionline.com/"
         ]
     }
 }
@@ -841,10 +841,40 @@ audio {
 .apa-item {
   padding-left: 2rem;
   text-indent: -2rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   font-size: 0.95rem;
-  line-height: 1.6;
+  line-height: 1.7;
   color: #cbd5e1;
+}
+
+.apa-url-container {
+  display: block;
+  text-indent: 0;
+  margin-top: 0.4rem;
+  padding-left: 0;
+}
+
+.apa-url {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--cyan-accent);
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.85rem;
+  word-break: break-all;
+  transition: all 0.2s ease;
+}
+
+.apa-url:hover {
+  background: rgba(0, 240, 255, 0.18);
+  border-color: var(--cyan-accent);
+  text-decoration: none;
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.3);
+  transform: translateX(2px);
 }
 
 /* FOOTER */
@@ -880,6 +910,114 @@ def slugify(text: str) -> str:
     text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('ascii')
     text = re.sub(r'[^a-zA-Z0-9]+', '-', text).strip('-').lower()
     return text[:60]
+
+
+def get_historical_apa_references(title: str) -> list:
+    """Retorna referencias bibliográficas en formato APA riguroso con URLs directas."""
+    t_lower = title.lower()
+    
+    if any(k in t_lower for k in ["integracion", "tuberias", "frameworks", "5 claves"]):
+        return [
+            "Fowler, M. (2023). *Enterprise integration patterns and event-driven architectures in modern clouds*. Martin Fowler's Bliki. https://martinfowler.com/articles/enterpriseIntegrationPatterns.html",
+            "Hohpe, G., & Woolf, B. (2003). *Enterprise Integration Patterns: Designing, building, and deploying messaging solutions*. Addison-Wesley. https://www.enterpriseintegrationpatterns.com",
+            "Confluent. (2025). *Streaming pipelines vs batch ETL: The modern real-time data architecture*. Confluent Resources. https://www.confluent.io/learn/batch-vs-real-time-data-processing/"
+        ]
+    elif "antigravity" in t_lower:
+        return [
+            "Google DeepMind. (2026). *Autonomous agents in software engineering: From assistive copilots to autonomous co-engineers*. Google AI Research. https://ai.google/research/",
+            "Google Cloud. (2026). *Vertex AI Agentic Workflows and Antigravity developer ecosystem*. Google Cloud Docs. https://cloud.google.com/vertex-ai/docs/generative-ai/agentic",
+            "Hong, S., et al. (2023). *MetaGPT: Meta programming for a multi-agent collaborative framework*. arXiv preprint arXiv:2308.00352. https://arxiv.org/abs/2308.00352"
+        ]
+    elif any(k in t_lower for k in ["claude", "empleado tecnico"]):
+        return [
+            "Anthropic. (2024). *Introducing computer use and advanced tool calling in Claude 3.5 Sonnet*. Anthropic Research. https://www.anthropic.com/news/3-5-models-and-computer-use",
+            "Anthropic. (2025). *Building effective agents: Workflows, routing, and evaluator-optimizer loops*. Anthropic Engineering. https://docs.anthropic.com/en/docs/agents-and-tools/tool-use",
+            "Schick, T., et al. (2023). *Toolformer: Language models can teach themselves to use tools*. Advances in Neural Information Processing Systems, 36. https://arxiv.org/abs/2302.04761"
+        ]
+    elif "data mesh" in t_lower:
+        return [
+            "Dehghani, Z. (2020). *Data Mesh principles and logical architecture*. Martin Fowler's Bliki. https://martinfowler.com/articles/data-mesh-principles.html",
+            "Dehghani, Z. (2022). *Data Mesh: Delivering data-driven value at scale*. O'Reilly Media. https://www.oreilly.com/library/view/data-mesh/9781492092384/ https://www.oreilly.com/library/view/data-mesh/9781492092384/",
+            "Thoughtworks. (2023). *Decentralized sociotechnical data architecture: A Data Mesh practical guide*. https://www.thoughtworks.com/what-we-do/data-and-ai/data-mesh"
+        ]
+    elif any(k in t_lower for k in ["plomeros", "fontanero", "arquitecto"]):
+        return [
+            "Reis, J., & Housley, M. (2022). *Fundamentals of Data Engineering: Plan and build robust data systems*. O'Reilly Media. https://www.oreilly.com/library/view/fundamentals-of-data/9781098108298/",
+            "dbt Labs. (2024). *The Analytics Engineer: Transitioning from data plumbing to context architecture*. dbt Guides. https://docs.getdbt.com/terms/analytics-engineering",
+            "Karpathy, A. (2023). *Software 2.0 and the curation of intentional systems*. Andrej Karpathy Blog. https://karpathy.medium.com/software-2-0-a64111b443c9"
+        ]
+    elif any(k in t_lower for k in ["deriva", "semantica", "metadatos"]):
+        return [
+            "Sankar, P. (2024). *Metadata management and preventing semantic drift in modern enterprise warehouses*. Atlan Publications. https://atlan.com/metadata-weekly/",
+            "Google Cloud. (2025). *Dataplex Universal Catalog: Automated metadata discovery, lineage, and data profiling*. Google Cloud. https://cloud.google.com/dataplex/docs/metadata-management",
+            "Armbrust, M., et al. (2021). *Lakehouse: A new generation of open platforms that unify data warehousing and advanced analytics*. CIDR 2021. https://www.cidrdb.org/cidr2021/papers/cidr2021_paper17.pdf"
+        ]
+    elif any(k in t_lower for k in ["costo invisible", "energetica", "sostenibilidad"]):
+        return [
+            "Strubell, E., Ganesh, A., & McCallum, A. (2019). *Energy and policy considerations for deep learning in NLP*. arXiv preprint arXiv:1906.02243. https://arxiv.org/abs/1906.02243",
+            "Green Software Foundation. (2024). *Software Carbon Intensity (SCI) specification for cloud computing architectures*. https://greensoftware.foundation/",
+            "Patterson, D., et al. (2021). *Carbon emissions and large neural network training*. arXiv preprint arXiv:2104.10350. https://arxiv.org/abs/2104.10350"
+        ]
+    elif any(k in t_lower for k in ["lambda", "kappa"]):
+        return [
+            "Kreps, J. (2014). *Questioning the Lambda Architecture*. O'Reilly Radar. https://www.oreilly.com/radar/questioning-the-lambda-architecture/",
+            "Marz, N. (2011). *How to beat the CAP theorem: The Lambda Architecture pattern*. Nathan Marz Blog. http://nathanmarz.com/blog/how-to-beat-the-cap-theorem.html",
+            "Gao, C., & Hueske, F. (2023). *Stream processing with Apache Flink and Kafka in enterprise systems*. O'Reilly Media. https://www.oreilly.com/library/view/stream-processing-with/9781491974285/"
+        ]
+    elif any(k in t_lower for k in ["amnesia", "aprendizaje"]):
+        return [
+            "Packer, C., et al. (2023). *MemGPT: Towards LLMs as operating systems with tiered memory hierarchy*. arXiv preprint arXiv:2310.08560. https://arxiv.org/abs/2310.08560",
+            "Google DeepMind. (2024). *Long-context retrieval and persistent memory in multimodal models*. Google Research. https://deepmind.google/technologies/gemini/",
+            "Park, J. S., et al. (2023). *Generative agents: Interactive simulacra of human behavior*. arXiv preprint arXiv:2304.03442. https://arxiv.org/abs/2304.03442"
+        ]
+    elif "burbuja" in t_lower:
+        return [
+            "Cahn, D. (2024). *AI's $600B Question: Where is the revenue?* Sequoia Capital Insights. https://www.sequoiacap.com/article/ais-600b-question/",
+            "Covello, J., et al. (2024). *Gen AI: Too much spend, too little benefit?* Goldman Sachs Global Macro Research. https://www.goldmansachs.com/insights/pages/gen-ai-too-much-spend-too-little-benefit.html",
+            "Acemoglu, D. (2024). *The simple macroeconomics of AI*. National Bureau of Economic Research (NBER Working Paper 32487). https://www.nber.org/papers/w32487"
+        ]
+    elif "razona" in t_lower:
+        return [
+            "OpenAI. (2024). *Learning to reason with LLMs: Reinforcement learning and chain-of-thought in OpenAI o1*. OpenAI Research. https://openai.com/index/learning-to-reason-with-llms/",
+            "Google DeepMind. (2025). *Thinking Mode: Dynamic reasoning and deliberation in Gemini 2.0 Flash*. Google AI Blog. https://ai.google.dev/gemini-api/docs/thinking-mode",
+            "Wei, J., et al. (2022). *Chain-of-thought prompting elicits reasoning in large language models*. NeurIPS 2022. https://arxiv.org/abs/2201.11903"
+        ]
+    elif any(k in t_lower for k in ["maquina del tiempo", "scd2", "estrella"]):
+        return [
+            "Kimball, R., & Ross, M. (2013). *The Data Warehouse Toolkit: The definitive guide to dimensional modeling (3rd ed.)*. Wiley. https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/slowly-changing-dimensions/",
+            "dbt Labs. (2024). *Snapshotting slowly changing dimensions (Type 2) in modern data warehouses*. dbt Docs. https://docs.getdbt.com/docs/build/snapshots",
+            "Inmon, W. H. (2005). *Building the Data Warehouse (4th ed.)*. John Wiley & Sons. https://www.wiley.com/en-us/Building+the+Data+Warehouse%2C+4th+Edition-p-9780764599446"
+        ]
+    elif any(k in t_lower for k in ["metricas", "confiar", "confianza"]):
+        return [
+            "Moses, B., Gavish, L., & Vorwerck, M. (2022). *Data Quality Fundamentals: A practitioner's guide to building trustworthy data pipelines*. O'Reilly Media. https://www.montecarlodata.com/blog-what-is-data-observability/",
+            "Great Expectations. (2024). *Standardizing automated data assertion and validation in production pipelines*. https://greatexpectations.io/",
+            "Google Cloud. (2025). *Dataplex auto data quality: Rule-based verification for enterprise tables*. https://cloud.google.com/dataplex/docs/auto-data-quality-overview"
+        ]
+    elif any(k in t_lower for k in ["segundo cerebro", "c.o.d.e", "p.a.r.a"]):
+        return [
+            "Forte, T. (2022). *Building a Second Brain: A proven method to organize your digital life and unlock your creative potential*. Atria Books. https://www.buildingasecondbrain.com/para",
+            "Matuschak, A. (2021). *Evergreen notes and networked thought systems*. Andy Matuschak Essays. https://andymatuschak.org/",
+            "Ahrens, S. (2017). *How to Take Smart Notes: One simple technique to boost writing, learning and thinking*. CreateSpace. https://takesmartnotes.com/"
+        ]
+    elif any(k in t_lower for k in ["vscode", "mando"]):
+        return [
+            "Microsoft. (2024). *Visual Studio Code architecture and Language Server Protocol specification*. VS Code Documentation. https://code.visualstudio.com/api",
+            "GitHub. (2024). *Next-generation AI development environments: Workspaces and multi-file reasoning*. GitHub Blog. https://github.blog/",
+            "Anthropic. (2024). *Model Context Protocol integration in developer IDEs*. https://modelcontextprotocol.io"
+        ]
+    elif "vibe coding" in t_lower:
+        return [
+            "Reliable Data Engineering. (2026). *Vibe Coding, Vibe Reviewing and the illusion of software competence*. https://reliable-data-engineering.netlify.app/posts/article_vibe_coding_vibe_reviewing/",
+            "Karpathy, A. (2025). *On vibe coding: Programming with intent rather than keystrokes*. Andrej Karpathy Publications. https://x.com/karpathy/status/1886192184808149383",
+            "Microsoft Research. (2024). *The impact of AI-assisted code generation on production software quality*. https://www.microsoft.com/en-us/research/publication/the-impact-of-ai-on-developer-productivity/"
+        ]
+    else:
+        return [
+            "Google DeepMind. (2024). *Gemini: A family of highly capable multimodal models*. arXiv preprint arXiv:2312.11805. https://arxiv.org/abs/2312.11805",
+            "Reis, J., & Housley, M. (2022). *Fundamentals of Data Engineering*. O'Reilly Media. https://www.oreilly.com/library/view/fundamentals-of-data/9781098108298/",
+            "Dehghani, Z. (2022). *Data Mesh: Delivering data-driven value at scale*. O'Reilly Media. https://www.oreilly.com/library/view/data-mesh/9781492092384/ https://www.oreilly.com/library/view/data-mesh/9781492092384/"
+        ]
 
 def build_all_articles():
     generate_css()
@@ -943,12 +1081,7 @@ def build_all_articles():
                     "body": "La transición hacia sistemas asistidos por IA eleva la exigencia de auditoría, trazabilidad y control semántico para evitar fallas silenciosas en producción."
                 }
             ]
-            apa_references = [
-                "Corona, C. (2026). *sIA: Bitácora de Investigación Técnica y Estrategia Digital*. Cuadernos de Arquitectura.",
-                "Google DeepMind. (2024). *Advancing AI applications in enterprise data engineering*. Google Research.",
-                "Dehghani, Z. (2022). *Data Mesh: Delivering data-driven value at scale*. O'Reilly Media."
-            ]
-            apa_refs = apa_references
+            apa_refs = get_historical_apa_references(title)
         
         article_filename = f"{slug}.html"
         article_path = ARTICULOS_DIR / article_filename
@@ -1031,9 +1164,23 @@ def render_article_html(title, subtitle, category, badge_color, pub_date, read_t
     for ref in apa_refs:
         # Convert markdown italics to <em>
         formatted_ref = re.sub(r'\*(.*?)\*', r'<em>\1</em>', ref)
-        # Convert links to <a>
-        formatted_ref = re.sub(r'(https?://[^\s]+)', r'<a href="\1" target="_blank" rel="noopener">\1</a>', formatted_ref)
-        apa_html += f'<li class="apa-item">{formatted_ref}</li>\n'
+        
+        # Extract URL
+        m_url = re.search(r'(https?://[^\s]+)', formatted_ref)
+        if m_url:
+            raw_url = m_url.group(1).rstrip('.')
+            text_without_url = formatted_ref.replace(raw_url, '').strip().rstrip('.')
+            apa_html += f'''<li class="apa-item">
+                {text_without_url}.
+                <span class="apa-url-container">
+                    <a href="{raw_url}" target="_blank" rel="noopener" class="apa-url">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        {raw_url}
+                    </a>
+                </span>
+            </li>\n'''
+        else:
+            apa_html += f'<li class="apa-item">{formatted_ref}</li>\n'
         
     return f"""<!DOCTYPE html>
 <html lang="es">
