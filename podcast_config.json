@@ -3,5 +3,13 @@
   "owner_name": "Carlos Corona",
   "owner_email": "charly.corona@gmail.com",
   "hosts": ["Jorge", "Dalia"],
-  "genre": "Tecnología, Inteligencia Artificial & Big Data"
+  "genre": "Tecnología, Inteligencia Artificial, Impresión 3D & Big Data",
+  "topics": [
+    "Inteligencia Artificial, Agentes Autónomos & Modelos de Decisión (JEPA, LLMs, MCP, Antigravity)",
+    "Big Data, Cloud & Data Engineering (BigQuery, dbt, Airflow, Data Mesh, Kafka)",
+    "Impresión 3D, Fabricación Digital & Bambu Lab (X1C, P1S, A1, AMS, Visión IA LiDAR, MakerWorld)",
+    "Hardware, Movilidad & Silicio Neuronal (Galaxy S25, Insta360 X4, NPUs en el Borde)",
+    "Cultura Geek, Anime & Literatura Fantástica (Sword Art Online, Mushoku Tensei, Sci-Fi)"
+  ]
 }
+

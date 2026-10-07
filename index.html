@@ -40,9 +40,10 @@
             <p>Cada episodio de podcast se respalda en un artículo de investigación con análisis de arquitectura, trade-offs de producción y bibliografía en formato APA.</p>
             
             <div class="filter-bar">
-                <button class="filter-btn active" onclick="filterArticles('all')">Todos (27)</button>
+                <button class="filter-btn active" onclick="filterArticles('all')">Todos (28)</button>
                 <button class="filter-btn" onclick="filterArticles('deep-dive')">sIA Deep Dives</button>
                 <button class="filter-btn" onclick="filterArticles('noticias')">NoticIAs Daily</button>
+                <button class="filter-btn" onclick="filterArticles('maker-3d')">Impresión 3D & Maker</button>
                 <button class="filter-btn" onclick="filterArticles('archivo')">Archivo Histórico</button>
             </div>
         </div>
@@ -51,6 +52,29 @@
     <main class="container" id="articulos">
         <div class="magazine-grid">
             
+        <div class="card badge-amber" data-category="deep-dive maker-3d">
+            <div class="card-header">
+                <span class="badge badge-amber">Deep Dive</span>
+                <span class="card-meta">11 min • Wed, 07 Oct</span>
+            </div>
+            <h3>Bambu Lab y la Revolución de la Impresión 3D: Visión Computacional, LiDAR y el Ecosistema Maker</h3>
+            <p>De pasatiempo de calibración manual a electrodoméstico de alta precisión: cómo la compensación de resonancia activa, la IA en el borde y MakerWorld redefinieron...</p>
+            
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 Audio Podcast:</span>
+                </div>
+                <audio controls preload="none">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_Bambu_Lab_Impresion_3D.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="card-footer">
+                <a href="articulos/bambu-lab-impresion-3d-vision-lidar-maker.html" class="read-link">Leer artículo y APA &rarr;</a>
+                <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_Bambu_Lab_Impresion_3D.mp3" class="card-meta" download title="Descargar MP3">⬇ MP3</a>
+            </div>
+        </div>
+        
         <div class="card badge-cyan" data-category="deep-dive">
             <div class="card-header">
                 <span class="badge badge-cyan">Deep Dive</span>
@@ -695,7 +719,8 @@
 
             const cards = document.querySelectorAll('.card');
             cards.forEach(card => {
-                if (category === 'all' || card.getAttribute('data-category') === category) {
+                const itemCats = (card.getAttribute('data-category') || '').split(' ');
+                if (category === 'all' || itemCats.includes(category)) {
                     card.style.display = 'flex';
                 } else {
                     card.style.display = 'none';
@@ -705,3 +730,4 @@
     </script>
 </body>
 </html>
+

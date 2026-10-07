@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bambu Lab y la Revolución de la Impresión 3D: Visión Computacional, LiDAR y el Ecosistema Maker | sIA Digital Magazine</title>
+    <meta name="description" content="De pasatiempo de calibración manual a electrodoméstico de alta precisión: cómo la compensación de resonancia activa, la IA en el borde y MakerWorld re">
+    <link rel="stylesheet" href="../assets/css/magazine.css">
+    <link rel="icon" type="image/jpeg" href="../cover.jpg">
+</head>
+<body>
+    <header class="navbar">
+        <div class="container nav-wrapper">
+            <a href="../index.html" class="brand">
+                <img src="../cover.jpg" alt="sIA Logo" class="brand-logo">
+                <div class="brand-text">
+                    <h1>sIA Journal</h1>
+                    <span>Revista Digital & Podcast Tech</span>
+                </div>
+            </a>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">Inicio</a>
+                <a href="../index.html#deep-dives" class="nav-link">Deep Dives</a>
+                <a href="../index.html#noticias" class="nav-link">NoticIAs</a>
+                <a href="https://open.spotify.com/show/3oNxteAETV5wvEIPN1KDVN" target="_blank" class="btn-pill btn-spotify">Spotify</a>
+                <a href="../podcast.xml" target="_blank" class="btn-pill btn-rss">Feed RSS</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="article-container">
+        <nav class="breadcrumbs">
+            <a href="../index.html">Revista sIA</a> &rsaquo; <span>Deep Dive</span> &rsaquo; <span>Artículo</span>
+        </nav>
+
+        <article>
+            <header class="article-header">
+                <span class="badge badge-amber">Deep Dive</span>
+                <h1 class="article-title">Bambu Lab y la Revolución de la Impresión 3D: Visión Computacional, LiDAR y el Ecosistema Maker</h1>
+                <p class="article-subtitle">De pasatiempo de calibración manual a electrodoméstico de alta precisión: cómo la compensación de resonancia activa, la IA en el borde y MakerWorld redefinieron la manufactura aditiva.</p>
+
+                <div class="author-bar">
+                    <div>Investigación: <strong>Carlos Corona</strong> & <strong>sIA Editora</strong></div>
+                    <div>•</div>
+                    <div>Fecha: <strong>Wed, 07 Oct 2026 08:04:45 GMT</strong></div>
+                    <div>•</div>
+                    <div>Lectura: <strong>11 min</strong></div>
+                </div>
+            </header>
+
+            <!-- Embedded Audio Player -->
+            <div class="player-container">
+                <div class="player-label">
+                    <span>🎧 <strong>Escuchar episodio complementario de sIA:</strong></span>
+                    <a href="https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_Bambu_Lab_Impresion_3D.mp3" download>Descargar MP3</a>
+                </div>
+                <audio controls preload="metadata">
+                    <source src="https://charlycorona.github.io/noticias-podcast/audio/sIA_DeepDive_Bambu_Lab_Impresion_3D.mp3" type="audio/mpeg">
+                    Tu navegador no soporta el reproductor de audio.
+                </audio>
+            </div>
+
+            <!-- Main Article Body -->
+            <div class="article-body">
+                <div class="thesis-callout">
+                    <h4>Tesis Central de Investigación</h4>
+                    <p>"Bambu Lab transformó la impresión 3D FDM al reemplazar la calibración empírica por sensores de circuito cerrado: micro-LiDAR para la primera capa, acelerómetros para input shaping activo y visión artificial para detección de fallas. Sin embargo, su modelo de 'jardín vallado' reaviva la histórica tensión entre la conveniencia del producto de consumo masivo y la soberanía del software libre."</p>
+                </div>
+
+                <div style="background: rgba(148, 163, 184, 0.05); padding: 1rem 1.25rem; border-radius: 8px; margin-bottom: 2rem; font-size: 0.9rem; color: #94a3b8;">
+                    <strong>Nexo de Bitácora:</strong> Inaugura el nuevo pilar temático de Fabricación Digital y Hardware Maker en sIA, conectando con nuestras investigaciones sobre inferencia en el borde y silicio local.
+                </div>
+
+                
+        <section class="article-section">
+            <h2>1. El Salto Cuántico: Del Ensamblaje Artesanal al Electrodoméstico de Precisión</h2>
+            <p>Durante más de una década, la impresión 3D por modelado por deposición fundida (FDM) estuvo reservada a entusiastas del 'hágalo usted mismo' dispuestos a invertir cientos de horas nivelando camas con hojas de papel, ajustando tensiones de correas y depurando configuraciones en Marlin.</p>
+<p>La irrupción de Bambu Lab con la serie X1 y posteriormente las series P1 y A1 cambió radicalmente el paradigma: empaquetó cinemática CoreXY ultra rígida, aceleración de hasta 20,000 mm/s² y velocidades de 500 mm/s en una máquina calibrada de fábrica. El usuario dejó de tener a la impresora como su proyecto; el proyecto volvió a ser la pieza que necesitaba fabricar.</p>
+        </section>
+        
+        <section class="article-section">
+            <h2>2. Anatomía de Control: Sensores de Bucle Cerrado, Micro-LiDAR y Visión IA</h2>
+            <p>El secreto de la fiabilidad de Bambu Lab radica en sus capas de retroalimentación activa:</p>
+<ul>
+<li><strong>Micro-LiDAR y Doble Láser:</strong> Mide la altura y uniformidad de la primera capa con resolución submilimétrica, calibrando automáticamente el flujo de extrusión dinámico para cada bobina de filamento.</li>
+<li><strong>Compensación Activa de Resonancia (Input Shaping):</strong> Sensores de acelerómetro en el cabezal miden las frecuencias naturales del chasis para contra-oscilar los motores paso a paso, eliminando vibraciones fantasma (ringing/ghosting) en las esquinas.</li>
+<li><strong>Visión por Computadora en el Borde (NPU Local):</strong> Cámaras de monitoreo analizan continuamente la geometría de la impresión. Si detectan desprendimiento o la formación de marañas de filamento ('monstruo de espagueti'), la máquina frena la impresión inmediatamente y notifica al usuario vía móvil.</li>
+</ul>
+        </section>
+        
+        <section class="article-section">
+            <h2>3. El Debate Maker: Jardín Vallado vs Filosofía Open Source</h2>
+            <p>La llegada de Bambu Lab generó una profunda fractura en la comunidad maker tradicional. Si bien el software de corte (Bambu Studio) es un fork de código abierto basado en PrusaSlicer y Slic3r, el firmware de la placa controladora y las partes electrónicas clave son propietarios y dependen en gran medida del ecosistema en la nube y de la plataforma MakerWorld.</p>
+<p>Pioneros como Josef Prusa y la comunidad de proyectos como Voron Design argumentan que cerrar el ecosistema amenaza la sostenibilidad a largo plazo y la reparabilidad independiente del hardware. Incidentes de seguridad IoT y caídas de servidores en la nube demostraron los riesgos de la dependencia externa, acelerando la demanda por modos LAN seguros e integraciones locales con Home Assistant.</p>
+        </section>
+        
+        <section class="article-section">
+            <h2>4. Materiales de Ingeniería, Desperdicio en AMS y Conexión Geek con SAO</h2>
+            <p>El sistema automático de materiales (AMS) democratizó la impresión multi-color y con filamentos solubles de soporte. No obstante, el cambio recurrente de color genera un volumen considerable de desecho de purga ('poop'), lo que impulsa el desarrollo de algoritmos de optimización de corte en OrcaSlicer y boquillas de intercambio rápido.</p>
+<p>En el plano cultural, este salto tecnológico evoca la herrería de Lisbeth en el piso 48 de Aincrad en <em>Sword Art Online</em>: una interfaz donde la combinación precisa de parámetros digitales y materiales exóticos forja artefactos funcionales en el mundo físico.</p>
+        </section>
+        
+
+                <!-- APA Bibliography Section -->
+                <section class="apa-section">
+                    <h3>📚 Referencias Bibliográficas (Formato APA 7ª Edición)</h3>
+                    <ul class="apa-list">
+                        <li class="apa-item">
+                Bambu Lab. (2025). <em>Micro-LiDAR, active vibration compensation and AI print monitoring technologies</em>. Bambu Lab Technical Whitepapers.
+                <span class="apa-url-container">
+                    <a href="https://bambulab.com" target="_blank" rel="noopener" class="apa-url">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        https://bambulab.com
+                    </a>
+                </span>
+            </li>
+<li class="apa-item">
+                Gibson, I., Rosen, D., Stucker, B., & Khorasani, M. (2021). <em>Additive Manufacturing Technologies: 3D printing, rapid prototyping, and direct digital manufacturing</em> (3rd ed.). Springer.
+                <span class="apa-url-container">
+                    <a href="https://doi.org/10.1007/978-3-030-56127-7" target="_blank" rel="noopener" class="apa-url">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        https://doi.org/10.1007/978-3-030-56127-7
+                    </a>
+                </span>
+            </li>
+<li class="apa-item">
+                Prusa, J. (2024). <em>The state of open source in 3D printing: Community innovation versus proprietary walled gardens</em>. Prusa Research Blog.
+                <span class="apa-url-container">
+                    <a href="https://blog.prusa3d.com" target="_blank" rel="noopener" class="apa-url">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        https://blog.prusa3d.com
+                    </a>
+                </span>
+            </li>
+<li class="apa-item">
+                IEEE Spectrum. (2024). <em>How AI computer vision stopped 3D print failures before they start</em>. IEEE Spectrum Robotics.
+                <span class="apa-url-container">
+                    <a href="https://spectrum.ieee.org/3d-printing-ai" target="_blank" rel="noopener" class="apa-url">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                        https://spectrum.ieee.org/3d-printing-ai
+                    </a>
+                </span>
+            </li>
+
+                    </ul>
+                </section>
+            </div>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <a href="../index.html">Revista Digital</a>
+                <a href="https://open.spotify.com/show/3oNxteAETV5wvEIPN1KDVN" target="_blank">Spotify Show</a>
+                <a href="../podcast.xml">Feed RSS</a>
+                <a href="https://github.com/CharlyCorona/noticias-podcast" target="_blank">GitHub Repository</a>
+            </div>
+            <p>&copy; 2026 sIA Tech Media — Curaduría, Arquitectura & Rigor Técnico por Carlos Corona.</p>
+        </div>
+    </footer>
+</body>
+</html>

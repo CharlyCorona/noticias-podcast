@@ -350,8 +350,62 @@ Despliegue de One UI 9 con Android 17 en la serie Galaxy S25, firmware optimizad
             "Samsung Mobile. (2026). *One UI 9 based on Android 17 rollout schedule*. Samsung Newsroom. https://news.samsung.com/global/",
             "Dengeki Bunko. (2026). *Reki Kawahara announces Sword Art Online Integral Domain and Demons Crest anime adaptation*. Dengeki Online. https://dengekionline.com/"
         ]
+    },
+
+    # 8. Bambu Lab e Impresión 3D
+    "sIA_DeepDive_Bambu_Lab_Impresion_3D.mp3": {
+        "slug": "bambu-lab-impresion-3d-vision-lidar-maker",
+        "category": "Deep Dive",
+        "badge_color": "amber",
+        "read_time": "11 min",
+        "title": "Bambu Lab y la Revolución de la Impresión 3D: Visión Computacional, LiDAR y el Ecosistema Maker",
+        "subtitle": "De pasatiempo de calibración manual a electrodoméstico de alta precisión: cómo la compensación de resonancia activa, la IA en el borde y MakerWorld redefinieron la manufactura aditiva.",
+        "thesis": "Bambu Lab transformó la impresión 3D FDM al reemplazar la calibración empírica por sensores de circuito cerrado: micro-LiDAR para la primera capa, acelerómetros para input shaping activo y visión artificial para detección de fallas. Sin embargo, su modelo de 'jardín vallado' reaviva la histórica tensión entre la conveniencia del producto de consumo masivo y la soberanía del software libre.",
+        "nexo": "Inaugura el nuevo pilar temático de Fabricación Digital y Hardware Maker en sIA, conectando con nuestras investigaciones sobre inferencia en el borde y silicio local.",
+        "content_blocks": [
+            {
+                "title": "1. El Salto Cuántico: Del Ensamblaje Artesanal al Electrodoméstico de Precisión",
+                "body": """
+Durante más de una década, la impresión 3D por modelado por deposición fundida (FDM) estuvo reservada a entusiastas del 'hágalo usted mismo' dispuestos a invertir cientos de horas nivelando camas con hojas de papel, ajustando tensiones de correas y depurando configuraciones en Marlin.
+
+La irrupción de Bambu Lab con la serie X1 y posteriormente las series P1 y A1 cambió radicalmente el paradigma: empaquetó cinemática CoreXY ultra rígida, aceleración de hasta 20,000 mm/s² y velocidades de 500 mm/s en una máquina calibrada de fábrica. El usuario dejó de tener a la impresora como su proyecto; el proyecto volvió a ser la pieza que necesitaba fabricar.
+"""
+            },
+            {
+                "title": "2. Anatomía de Control: Sensores de Bucle Cerrado, Micro-LiDAR y Visión IA",
+                "body": """
+El secreto de la fiabilidad de Bambu Lab radica en sus capas de retroalimentación activa:
+* **Micro-LiDAR y Doble Láser:** Mide la altura y uniformidad de la primera capa con resolución submilimétrica, calibrando automáticamente el flujo de extrusión dinámico para cada bobina de filamento.
+* **Compensación Activa de Resonancia (Input Shaping):** Sensores de acelerómetro en el cabezal miden las frecuencias naturales del chasis para contra-oscilar los motores paso a paso, eliminando vibraciones fantasma (ringing/ghosting) en las esquinas.
+* **Visión por Computadora en el Borde (NPU Local):** Cámaras de monitoreo analizan continuamente la geometría de la impresión. Si detectan desprendimiento o la formación de marañas de filamento ('monstruo de espagueti'), la máquina frena la impresión inmediatamente y notifica al usuario vía móvil.
+"""
+            },
+            {
+                "title": "3. El Debate Maker: Jardín Vallado vs Filosofía Open Source",
+                "body": """
+La llegada de Bambu Lab generó una profunda fractura en la comunidad maker tradicional. Si bien el software de corte (Bambu Studio) es un fork de código abierto basado en PrusaSlicer y Slic3r, el firmware de la placa controladora y las partes electrónicas clave son propietarios y dependen en gran medida del ecosistema en la nube y de la plataforma MakerWorld.
+
+Pioneros como Josef Prusa y la comunidad de proyectos como Voron Design argumentan que cerrar el ecosistema amenaza la sostenibilidad a largo plazo y la reparabilidad independiente del hardware. Incidentes de seguridad IoT y caídas de servidores en la nube demostraron los riesgos de la dependencia externa, acelerando la demanda por modos LAN seguros e integraciones locales con Home Assistant.
+"""
+            },
+            {
+                "title": "4. Materiales de Ingeniería, Desperdicio en AMS y Conexión Geek con SAO",
+                "body": """
+El sistema automático de materiales (AMS) democratizó la impresión multi-color y con filamentos solubles de soporte. No obstante, el cambio recurrente de color genera un volumen considerable de desecho de purga ('poop'), lo que impulsa el desarrollo de algoritmos de optimización de corte en OrcaSlicer y boquillas de intercambio rápido.
+
+En el plano cultural, este salto tecnológico evoca la herrería de Lisbeth en el piso 48 de Aincrad en *Sword Art Online*: una interfaz donde la combinación precisa de parámetros digitales y materiales exóticos forja artefactos funcionales en el mundo físico.
+"""
+            }
+        ],
+        "apa_references": [
+            "Bambu Lab. (2025). *Micro-LiDAR, active vibration compensation and AI print monitoring technologies*. Bambu Lab Technical Whitepapers. https://bambulab.com",
+            "Gibson, I., Rosen, D., Stucker, B., & Khorasani, M. (2021). *Additive Manufacturing Technologies: 3D printing, rapid prototyping, and direct digital manufacturing* (3rd ed.). Springer. https://doi.org/10.1007/978-3-030-56127-7",
+            "Prusa, J. (2024). *The state of open source in 3D printing: Community innovation versus proprietary walled gardens*. Prusa Research Blog. https://blog.prusa3d.com",
+            "IEEE Spectrum. (2024). *How AI computer vision stopped 3D print failures before they start*. IEEE Spectrum Robotics. https://spectrum.ieee.org/3d-printing-ai"
+        ]
     }
 }
+
 
 # ==============================================================================
 # CSS DE LA REVISTA DIGITAL (ASSETS/CSS/MAGAZINE.CSS)
@@ -616,6 +670,10 @@ a:hover {
   background: var(--emerald-accent);
 }
 
+.card.badge-amber:hover::before {
+  background: #f59e0b;
+}
+
 .card-header {
   display: flex;
   justify-content: space-between;
@@ -648,6 +706,12 @@ a:hover {
   background: rgba(16, 185, 129, 0.1);
   color: var(--emerald-accent);
   border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.badge-amber {
+  background: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.3);
 }
 
 .card-meta {
@@ -1289,9 +1353,21 @@ def render_magazine_index(catalog):
     
     grid_cards_html = ""
     for item in catalog:
-        cat_class = "deep-dive" if "Deep Dive" in item["category"] else ("noticias" if "NoticIAs" in item["category"] else "archivo")
+        cat_classes = []
+        if "Deep Dive" in item["category"]:
+            cat_classes.append("deep-dive")
+        elif "NoticIAs" in item["category"]:
+            cat_classes.append("noticias")
+        else:
+            cat_classes.append("archivo")
+            
+        full_text = f"{item['title']} {item['subtitle']} {item.get('category', '')}".lower()
+        if any(k in full_text for k in ["3d", "bambu", "impresión", "impresora", "maker"]):
+            cat_classes.append("maker-3d")
+            
+        cat_class_attr = " ".join(cat_classes)
         grid_cards_html += f"""
-        <div class="card badge-{item['badge_color']}" data-category="{cat_class}">
+        <div class="card badge-{item['badge_color']}" data-category="{cat_class_attr}">
             <div class="card-header">
                 <span class="badge badge-{item['badge_color']}">{item['category']}</span>
                 <span class="card-meta">{item['read_time']} • {item['pub_date'][:11]}</span>
@@ -1360,6 +1436,7 @@ def render_magazine_index(catalog):
                 <button class="filter-btn active" onclick="filterArticles('all')">Todos ({len(catalog)})</button>
                 <button class="filter-btn" onclick="filterArticles('deep-dive')">sIA Deep Dives</button>
                 <button class="filter-btn" onclick="filterArticles('noticias')">NoticIAs Daily</button>
+                <button class="filter-btn" onclick="filterArticles('maker-3d')">Impresión 3D & Maker</button>
                 <button class="filter-btn" onclick="filterArticles('archivo')">Archivo Histórico</button>
             </div>
         </div>
@@ -1391,7 +1468,8 @@ def render_magazine_index(catalog):
 
             const cards = document.querySelectorAll('.card');
             cards.forEach(card => {{
-                if (category === 'all' || card.getAttribute('data-category') === category) {{
+                const itemCats = (card.getAttribute('data-category') || '').split(' ');
+                if (category === 'all' || itemCats.includes(category)) {{
                     card.style.display = 'flex';
                 }} else {{
                     card.style.display = 'none';
@@ -1401,6 +1479,7 @@ def render_magazine_index(catalog):
     </script>
 </body>
 </html>
+
 """
     index_file = BASE_DIR / "index.html"
     index_file.write_text(index_html, encoding='utf-8')

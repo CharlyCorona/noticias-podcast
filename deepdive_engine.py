@@ -35,11 +35,23 @@ PILLARS = {
         "Inferencia en el Borde: NPU Local en Galaxy S25 vs Cloud APIs",
         "Video Espacial y Fotogrametría Computacional con Insta360 X4"
     ],
+    "3D_PRINTING_BAMBULAB": [
+        "Bambu Lab y la Revolución de la Impresión 3D: Visión Computacional, Micro-LiDAR y Ecosistemas Cerrados",
+        "Manufactura Distribuida y Prototipado Rápido: De Modelos CAD a Piezas Funcionales",
+        "El Dilema Maker: Ecosistemas Integrados (Bambu Lab) vs Filosofía Open Source (Voron, Prusa)",
+        "Sistemas Multi-Material y AMS: Optimizando el Desperdicio de Purga y Materiales Compuestos"
+    ],
+    "DECISION_MODELS_JEPA": [
+        "JEPA de Yann LeCun vs LLMs: Por qué Predecir el Mundo es Superior a Predecir Tokens",
+        "Modelos de Mundo y Arquitecturas de Decisión: Del Espacio Latente a la Planificación Autónoma",
+        "Decision Transformers y Reinforcement Learning en Agentes de Producción"
+    ],
     "GEEK_SYSTEMS": [
         "El Sistema Cardinal de Sword Art Online y la Arquitectura de AGI",
         "Mundos Virtuales Persistentes: De The Seed a los Metaversos Agénticos"
     ]
 }
+
 
 def build_deepdive_script(topic: str, thesis: str, technical_points: list, debate_points: list, geek_connection: str) -> str:
     """

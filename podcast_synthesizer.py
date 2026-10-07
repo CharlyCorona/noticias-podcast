@@ -40,7 +40,26 @@ def clean_for_tts(text: str) -> str:
     t = re.sub(r'\bTTS\b', 'T T S', t)
     t = re.sub(r'\bAPI\b', 'A P I', t)
     t = re.sub(r'\bOne UI\b', 'Uan U I', t)
+    # Impresión 3D y Bambu Lab
+    t = re.sub(r'\bAMS\b', 'A M S', t)
+    t = re.sub(r'\bLiDAR\b', 'Láidar', t)
+    t = re.sub(r'\bX1-Carbon\b', 'X uno Carbón', t)
+    t = re.sub(r'\bX1C\b', 'X uno C', t)
+    t = re.sub(r'\bP1S\b', 'P uno S', t)
+    t = re.sub(r'\bA1\b', 'A uno', t)
+    t = re.sub(r'\bOrcaSlicer\b', 'Orca Slaiser', t)
+    t = re.sub(r'\bMakerWorld\b', 'Meiker-güorld', t)
+    t = re.sub(r'\bFDM\b', 'F D M', t)
+    t = re.sub(r'\bPLA\b', 'P L A', t)
+    t = re.sub(r'\bPETG\b', 'P E T G', t)
+    t = re.sub(r'\bTPU\b', 'T P U', t)
+    # Modelos de Decisión y JEPA
+    t = re.sub(r'\bJEPA\b', 'Yepa', t)
+    t = re.sub(r'\bI-JEPA\b', 'I-Yepa', t)
+    t = re.sub(r'\bV-JEPA\b', 'V-Yepa', t)
+    t = re.sub(r'\bLeCun\b', 'LeCún', t)
     return t
+
 
 async def process_dialogue(script_text: str, episode_title: str, custom_filename: str = None, episode_description: str = None) -> Path:
     lines = script_text.strip().split('\n')
